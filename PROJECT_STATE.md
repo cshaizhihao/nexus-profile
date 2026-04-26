@@ -306,3 +306,12 @@
 - Homepage now conditionally renders major modules from backend-configurable layout.
 - Admin preview upgraded to reflect Hero + Now + Social + Projects block visibility.
 - Redeployed production frontend.
+
+### 2026-04-27 大步三连交付
+
+- Added homepage layout mode support: compact / balanced / showcase.
+- Added backend controls for homepage major module visibility.
+- Added drag-and-drop sorting for Social and Now blocks.
+- Upgraded preview to reflect Hero + Now + Social + Projects with layout toggles.
+- Homepage now consumes backend layout mode.
+- Redeployed production frontend.

@@ -1,5 +1,5 @@
 <template>
-  <section class="grid gap-8">
+  <section class="grid gap-8" :class="layoutModeClass">
     <HomeMarquee />
 
     <div class="grid gap-6 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
@@ -91,5 +91,7 @@ const nowItems = computed(() => {
 const homepageLayout = computed(() => {
   try { return JSON.parse(store.profile?.homepageLayout || '{}') } catch { return {} }
 })
+const layoutMode = computed(() => homepageLayout.value.mode || 'balanced')
+const layoutModeClass = computed(() => layoutMode.value === 'compact' ? 'home-layout-compact' : layoutMode.value === 'showcase' ? 'home-layout-showcase' : 'home-layout-balanced')
 onMounted(() => { if (!store.siteConfig) store.loadAll() })
 </script>

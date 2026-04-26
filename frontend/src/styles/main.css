@@ -200,3 +200,11 @@ body.dark-archive {
   .quick-dock { display: none !important; }
 }
 .magnetic-wrap { transition: transform var(--motion-base) var(--ease-out-expo); }
+
+.home-layout-compact .archive-card,.home-layout-compact .bento-card{padding:1.15rem !important;}
+.home-layout-compact .display-title,.home-layout-compact .kinetic-title{font-size:clamp(4rem,10vw,9rem);}
+.home-layout-showcase .archive-card,.home-layout-showcase .bento-card{box-shadow:0 42px 120px rgba(65,47,25,.18);}
+.home-layout-showcase .kinetic-title{font-size:clamp(5.2rem,15vw,13rem);}
+.home-layout-balanced{}
+.drag-handle{cursor:grab; user-select:none; border:1px dashed rgba(17,16,14,.18); border-radius:999px; padding:.35rem .7rem; font-size:.75rem; font-family:ui-sans-serif,system-ui,sans-serif; color:#6b6257;}
+.dragging{opacity:.55;}

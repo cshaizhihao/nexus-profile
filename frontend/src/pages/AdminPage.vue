@@ -101,7 +101,8 @@
           <section class="archive-card p-5">
             <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Social links</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">社交入口</h3></div><button type="button" class="ghost-btn" @click="addSocial">新增</button></div>
             <div class="grid gap-3">
-              <div v-for="(item, index) in socialItems" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4 md:grid-cols-[110px_1fr_1fr_1fr_auto]">
+              <div v-for="(item, index) in socialItems" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4 md:grid-cols-[90px_110px_1fr_1fr_1fr_auto]" draggable="true" @dragstart="onSocialDragStart(index, $event)" @dragover.prevent @drop="onSocialDrop(index)" @dragend="onDragEnd($event)">
+                <div class="drag-handle">拖拽</div>
                 <input v-model="item.type" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="类型" />
                 <input v-model="item.label" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="名称" />
                 <input v-model="item.href" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="链接" />
@@ -122,7 +123,8 @@
           <section class="archive-card p-5">
             <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Now board</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">当前关注</h3></div><button type="button" class="ghost-btn" @click="addNow">新增</button></div>
             <div class="grid gap-3">
-              <div v-for="(item, index) in nowBlocks" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4">
+              <div v-for="(item, index) in nowBlocks" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4" draggable="true" @dragstart="onNowDragStart(index, $event)" @dragover.prevent @drop="onNowDrop(index)" @dragend="onDragEnd($event)">
+                <div class="drag-handle w-max">拖拽</div>
                 <div class="grid gap-3 md:grid-cols-3">
                   <input v-model="item.kicker" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="Kicker" />
                   <input v-model="item.title" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="标题" />
@@ -141,10 +143,11 @@
 
           <section class="archive-card p-5">
             <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Live preview</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">首页预览</h3></div></div>
-            <div class="mb-4 grid gap-3 md:grid-cols-3">
+            <div class="mb-4 grid gap-3 md:grid-cols-4">
               <label class="flex items-center gap-2 text-sm text-stone-600"><input v-model="homepageLayout.showNow" type="checkbox" /> 显示 Now</label>
               <label class="flex items-center gap-2 text-sm text-stone-600"><input v-model="homepageLayout.showSocial" type="checkbox" /> 显示 Social</label>
               <label class="flex items-center gap-2 text-sm text-stone-600"><input v-model="homepageLayout.showProjects" type="checkbox" /> 显示 Projects</label>
+              <label class="field !gap-1"><span>布局模式</span><select v-model="homepageLayout.mode"><option value="compact">紧凑</option><option value="balanced">平衡</option><option value="showcase">展陈</option></select></label>
             </div>
             <div class="grid gap-4 lg:grid-cols-[1.15fr_.85fr]">
               <div class="rounded-[1.75rem] border border-stone-950/10 bg-white/20 p-5">
@@ -246,10 +249,12 @@ const profileForm = reactive({
   techStack: '',
   socialLinks: '[{"type":"Code","label":"GitHub","href":"https://github.com/cshaizhihao"}]',
   nowItems: '[{"kicker":"Focus","title":"整理入口","desc":"把真正高频使用的服务放到清晰位置。"}]',
-  homepageLayout: '{"showNow":true,"showSocial":true,"showProjects":true}',
+  homepageLayout: '{"showNow":true,"showSocial":true,"showProjects":true,"mode":"balanced"}',
 })
 const projectForm = reactive({ title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true })
-const homepageLayout = reactive({ showNow: true, showSocial: true, showProjects: true })
+const homepageLayout = reactive({ showNow: true, showSocial: true, showProjects: true, mode: 'balanced' })
+let dragSocialIndex = -1
+let dragNowIndex = -1
 
 watch(() => store.siteConfig, (config) => { if (config) Object.assign(siteForm, { title: config.title, subtitle: config.subtitle, description: config.description, avatarUrl: config.avatarUrl || '', backgroundType: config.backgroundType, backgroundValue: config.backgroundValue, customCss: config.customCss }) }, { immediate: true })
 watch(() => store.profile, (profile) => {
@@ -292,9 +297,14 @@ async function saveProfile() {
 }
 function addSocial() { socialItems.value.push({ type: 'Social', label: '', href: '', enabled: true, iconUrl: '' }) }
 function moveSocial(index: number, delta: number) { const target = index + delta; if (target < 0 || target >= socialItems.value.length) return; const [item] = socialItems.value.splice(index, 1); socialItems.value.splice(target, 0, item) }
+function onSocialDragStart(index: number, event: DragEvent) { dragSocialIndex = index; (event.currentTarget as HTMLElement)?.classList.add('dragging') }
+function onSocialDrop(index: number) { if (dragSocialIndex < 0 || dragSocialIndex === index) return; const [item] = socialItems.value.splice(dragSocialIndex, 1); socialItems.value.splice(index, 0, item); dragSocialIndex = -1 }
 function removeSocial(index: number) { socialItems.value.splice(index, 1) }
 function addNow() { nowBlocks.value.push({ kicker: 'Focus', title: '', desc: '', enabled: true, variant: 'default' }) }
 function moveNow(index: number, delta: number) { const target = index + delta; if (target < 0 || target >= nowBlocks.value.length) return; const [item] = nowBlocks.value.splice(index, 1); nowBlocks.value.splice(target, 0, item) }
+function onNowDragStart(index: number, event: DragEvent) { dragNowIndex = index; (event.currentTarget as HTMLElement)?.classList.add('dragging') }
+function onNowDrop(index: number) { if (dragNowIndex < 0 || dragNowIndex === index) return; const [item] = nowBlocks.value.splice(dragNowIndex, 1); nowBlocks.value.splice(index, 0, item); dragNowIndex = -1 }
+function onDragEnd(event: DragEvent) { (event.currentTarget as HTMLElement)?.classList.remove('dragging'); dragSocialIndex = -1; dragNowIndex = -1 }
 function removeNow(index: number) { nowBlocks.value.splice(index, 1) }
 function editProject(project: Project) { editingProjectId.value = project.id; Object.assign(projectForm, project) }
 function resetProjectForm() { editingProjectId.value = null; Object.assign(projectForm, { title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true }) }
