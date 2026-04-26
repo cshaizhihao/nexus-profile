@@ -64,8 +64,10 @@
 
 ## In Progress
 
-- [ ] Implement CMS edit forms
-- [ ] Wire frontend pages to backend API
+- [x] Implemented CMS edit forms for site config, categories and links
+- [x] Wired homepage and navigation page to backend API
+- [x] Added frontend API client and Pinia site store
+- [x] Validated backend/frontend builds after CMS wiring
 - [ ] Add asset upload endpoint
 
 ## Todo
@@ -80,11 +82,11 @@
 
 ### Backend/CMS
 
-- [ ] Implement site config CRUD
-- [ ] Implement navigation category CRUD
-- [ ] Implement navigation link CRUD
+- [x] Implement site config CRUD
+- [x] Implement navigation category CRUD
+- [x] Implement navigation link CRUD
 - [ ] Implement icon upload endpoint
-- [ ] Add custom CSS persistence and safe rendering path
+- [x] Add custom CSS persistence field and API path
 
 ### Deployment
 
@@ -120,3 +122,9 @@
   - `438305f chore: initialize nexus profile project structure`
   - `4884106 fix: stabilize scaffold build and local preview`
 - Created and pushed GitHub repository: `https://github.com/cshaizhihao/nexus-profile`
+- Implemented Phase 2 CMS wiring:
+  - Admin site config form
+  - Admin navigation category creation/deletion
+  - Admin navigation link creation/deletion
+  - Frontend API client + Pinia store
+  - Homepage and navigation page now read from backend API
