@@ -49,12 +49,21 @@
 - [x] Created backend Fastify API scaffold
 - [x] Created Prisma schema for site config, navigation and assets
 - [x] Confirmed local ports `10080` and `10081` are free
+- [x] Installed frontend dependencies
+- [x] Installed backend dependencies
+- [x] Fixed Prisma compatibility by pinning Prisma to v6 line
+- [x] Generated Prisma client and initialized SQLite database
+- [x] Added frontend TypeScript/Vite configuration
+- [x] Validated frontend production build
+- [x] Validated backend TypeScript build
+- [x] Started local frontend/backend preview
+- [x] Validated backend health endpoint
 
 ## In Progress
 
-- [ ] Install dependencies
-- [ ] Run local frontend/backend preview
-- [ ] Validate API and frontend routes
+- [ ] Implement CMS edit forms
+- [ ] Wire frontend pages to backend API
+- [ ] Add asset upload endpoint
 
 ## Todo
 
@@ -100,3 +109,10 @@
 - Locked first product identity as `Nexus Profile / 星枢主页`.
 - Created initial frontend/backend/deployment/documentation structure.
 - Confirmed reason for previous short reply: long command was blocked by approval policy; switched to granular file writes.
+- Installed dependencies and fixed Prisma v7 incompatibility by pinning Prisma v6.
+- Started local preview:
+  - Frontend: `http://127.0.0.1:10080/`
+  - Backend: `http://127.0.0.1:10081/health`
+- Created Git commits:
+  - `438305f chore: initialize nexus profile project structure`
+  - `4884106 fix: stabilize scaffold build and local preview`
