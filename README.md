@@ -25,6 +25,8 @@ Repository: <https://github.com/cshaizhihao/nexus-profile>
 
 - Frontend: <http://127.0.0.1:10080>
 - Backend API: <http://127.0.0.1:10081>
+- Public no-port preview: <http://208.115.216.131/>
+- Public API via Nginx: <http://208.115.216.131/api/site-config>
 
 ## Development
 

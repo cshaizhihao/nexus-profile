@@ -104,6 +104,8 @@
 
 - Target local frontend preview: `http://127.0.0.1:10080`
 - Target backend API: `http://127.0.0.1:10081`
+- Public no-port preview through existing Nginx default server: `http://208.115.216.131/`
+- Public API through existing Nginx default server: `http://208.115.216.131/api/site-config`
 - Avoid single-page long-scroll design; route/module separation is mandatory.
 
 ## Update Log
@@ -128,3 +130,7 @@
   - Admin navigation link creation/deletion
   - Frontend API client + Pinia store
   - Homepage and navigation page now read from backend API
+- Fixed public access issue:
+  - Existing Docker Nginx default server was returning `444` for direct IP access.
+  - Reconfigured `/home/web/conf.d/default.conf` to proxy direct IP access to frontend `10080` and `/api/` to backend `10081`.
+  - Changed frontend API base to relative path and added Vite `/api` proxy for dev mode.
