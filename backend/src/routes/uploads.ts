@@ -16,7 +16,7 @@ export async function uploadRoutes(app: FastifyInstance) {
     decorateReply: false,
   })
 
-  app.post('/api/uploads/icon', async (request, reply) => {
+  app.post('/api/uploads/icon', { preHandler: app.verifyAdmin }, async (request, reply) => {
     const file = await request.file()
     if (!file) return reply.code(400).send({ message: 'No file uploaded' })
     if (!file.mimetype.startsWith('image/')) return reply.code(400).send({ message: 'Only image files are allowed' })

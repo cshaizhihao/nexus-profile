@@ -65,6 +65,9 @@ See [PROJECT_STATE.md](./PROJECT_STATE.md) for progress, completed tasks, todo l
 
 ## CMS Capabilities
 
+Admin write operations require login. Configure `ADMIN_PASSWORD` and `ADMIN_TOKEN` in `backend/.env`.
+
+
 - Edit homepage title, subtitle, description, avatar, background and custom CSS.
 - Create, edit and delete navigation categories.
 - Create, edit and delete navigation links.
@@ -80,3 +83,14 @@ Production deploy helper:
 ```bash
 bash scripts/deploy-production.sh
 ```
+
+## Admin Security
+
+Set these variables before production use:
+
+```bash
+ADMIN_PASSWORD="replace-with-strong-password"
+ADMIN_TOKEN="replace-with-random-token"
+```
+
+All CMS write APIs and image uploads require `Authorization: Bearer <ADMIN_TOKEN>`. The login API exchanges the admin password for that token.

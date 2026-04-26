@@ -158,3 +158,13 @@
 - `/api/` and `/uploads/` are proxied to backend `127.0.0.1:10081`.
 - Added `scripts/deploy-production.sh` and `scripts/nginx-direct-ip.conf`.
 - Updated Docker frontend Nginx config to proxy `/api/` and `/uploads/` to compose backend service.
+
+### 2026-04-26 后台安全与主题
+
+- Added admin login endpoint: `POST /api/auth/login`.
+- Protected all mutating CMS APIs with Bearer token verification.
+- Protected image upload endpoint with admin token.
+- Added admin login UI and local token storage.
+- Added four theme presets in CMS: 极简浅色、深空暗色、暖纸质感、Mono Dark.
+- Generated production admin password in local `.env` only; not committed.
+- Redeployed production static frontend and restarted built backend.

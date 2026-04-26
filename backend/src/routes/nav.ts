@@ -21,7 +21,7 @@ export async function navRoutes(app: FastifyInstance) {
     })
   })
 
-  app.post('/categories', async (request, reply) => {
+  app.post('/categories', { preHandler: app.verifyAdmin }, async (request, reply) => {
     const body = request.body as CategoryBody
     if (!body?.name?.trim()) return reply.code(400).send({ message: 'Category name is required' })
     return prisma.navCategory.create({
@@ -29,7 +29,7 @@ export async function navRoutes(app: FastifyInstance) {
     })
   })
 
-  app.put('/categories/:id', async (request, reply) => {
+  app.put('/categories/:id', { preHandler: app.verifyAdmin }, async (request, reply) => {
     const { id } = request.params as { id: string }
     const body = request.body as Partial<CategoryBody>
     if (body.name !== undefined && !body.name.trim()) return reply.code(400).send({ message: 'Category name cannot be empty' })
@@ -43,7 +43,7 @@ export async function navRoutes(app: FastifyInstance) {
     })
   })
 
-  app.delete('/categories/:id', async (request) => {
+  app.delete('/categories/:id', { preHandler: app.verifyAdmin }, async (request) => {
     const { id } = request.params as { id: string }
     await prisma.navCategory.delete({ where: { id: Number(id) } })
     return { ok: true }
@@ -53,7 +53,7 @@ export async function navRoutes(app: FastifyInstance) {
     return prisma.navLink.findMany({ orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }], include: { category: true } })
   })
 
-  app.post('/links', async (request, reply) => {
+  app.post('/links', { preHandler: app.verifyAdmin }, async (request, reply) => {
     const body = request.body as LinkBody
     if (!body?.title?.trim()) return reply.code(400).send({ message: 'Link title is required' })
     if (!body?.url?.trim()) return reply.code(400).send({ message: 'Link URL is required' })
@@ -71,7 +71,7 @@ export async function navRoutes(app: FastifyInstance) {
     })
   })
 
-  app.put('/links/:id', async (request, reply) => {
+  app.put('/links/:id', { preHandler: app.verifyAdmin }, async (request, reply) => {
     const { id } = request.params as { id: string }
     const body = request.body as Partial<LinkBody>
     if (body.title !== undefined && !body.title.trim()) return reply.code(400).send({ message: 'Link title cannot be empty' })
@@ -91,7 +91,7 @@ export async function navRoutes(app: FastifyInstance) {
     })
   })
 
-  app.delete('/links/:id', async (request) => {
+  app.delete('/links/:id', { preHandler: app.verifyAdmin }, async (request) => {
     const { id } = request.params as { id: string }
     await prisma.navLink.delete({ where: { id: Number(id) } })
     return { ok: true }

@@ -20,7 +20,7 @@ export async function siteRoutes(app: FastifyInstance) {
     })
   })
 
-  app.put('/', async (request) => {
+  app.put('/', { preHandler: app.verifyAdmin }, async (request) => {
     const body = request.body as Record<string, unknown>
     const data = Object.fromEntries(
       allowedFields.filter((field) => body[field] !== undefined).map((field) => [field, String(body[field] ?? '')]),
