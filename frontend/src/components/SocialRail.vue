@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 const props = defineProps<{ links?: Array<{ type: string; label: string; href: string; enabled?: boolean; iconUrl?: string }> }>()
-const fallback = [
+const fallback: Array<{ type: string; label: string; href: string; enabled?: boolean; iconUrl?: string }> = [
   { type: 'Code', label: 'GitHub', href: 'https://github.com/cshaizhihao' },
   { type: 'Archive', label: 'Projects', href: '/projects' },
   { type: 'Gateway', label: 'Navigation', href: '/navigation' },
