@@ -324,3 +324,13 @@
 - Removed old paper texture language and unified components under modern glass-metal surfaces.
 - Preserved CMS/product structure while replacing visual identity system.
 - Redeployed production frontend.
+
+### 2026-04-27 Modern editorial structure pass
+
+- Rebuilt homepage hero composition into stronger editorial structure.
+- Reworked navigation page into a more productized index surface.
+- Reworked projects page into a stronger portfolio grid.
+- Reworked profile page into a sharper dossier layout.
+- Added modern structural page classes and responsive layout system.
+- Switched typography/color language toward sharper high-fashion tech editorial direction.
+- Redeployed production frontend.
