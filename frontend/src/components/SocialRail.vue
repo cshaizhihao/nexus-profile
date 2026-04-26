@@ -5,7 +5,7 @@
       <RouterLink to="/profile" class="mono text-xs uppercase tracking-[.2em] text-stone-500">Profile</RouterLink>
     </div>
     <div class="grid gap-3 sm:grid-cols-3">
-      <a v-for="item in links" :key="item.label" :href="item.href" target="_blank" rel="noreferrer" class="rounded-2xl border border-stone-950/10 bg-white/25 p-4 transition hover:-translate-y-1 hover:bg-stone-950 hover:text-white">
+      <a v-for="item in visibleLinks" :key="item.label" :href="item.href" target="_blank" rel="noreferrer" class="rounded-2xl border border-stone-950/10 bg-white/25 p-4 transition hover:-translate-y-1 hover:bg-stone-950 hover:text-white">
         <p class="mono text-[10px] uppercase tracking-[.2em] opacity-60">{{ item.type }}</p>
         <p class="mt-3 text-xl tracking-[-0.03em]">{{ item.label }}</p>
       </a>
@@ -14,9 +14,12 @@
 </template>
 
 <script setup lang="ts">
-const links = [
+import { computed } from 'vue'
+const props = defineProps<{ links?: Array<{ type: string; label: string; href: string }> }>()
+const fallback = [
   { type: 'Code', label: 'GitHub', href: 'https://github.com/cshaizhihao' },
   { type: 'Archive', label: 'Projects', href: '/projects' },
   { type: 'Gateway', label: 'Navigation', href: '/navigation' },
 ]
+const visibleLinks = computed(() => props.links?.length ? props.links : fallback)
 </script>

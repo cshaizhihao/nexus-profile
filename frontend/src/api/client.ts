@@ -115,6 +115,7 @@ export type ProfileConfig = {
   tags: string
   techStack: string
   socialLinks: string
+  nowItems: string
 }
 
 export const contentApi = {

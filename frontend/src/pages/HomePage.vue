@@ -49,8 +49,8 @@
       </article></MagneticCard>
     </div>
 
-    <NowPanel />
-    <SocialRail />
+    <NowPanel :items="nowItems" />
+    <SocialRail :links="socialLinks" />
 
     <section v-if="featuredProjects.length" class="archive-card depth-card p-7 md:p-8">
       <div class="mb-6 flex items-end justify-between gap-4">
@@ -82,5 +82,11 @@ const config = computed(() => store.siteConfig)
 const profile = computed(() => store.profile)
 const displayName = computed(() => config.value?.title || 'Zaki Archive')
 const featuredProjects = computed(() => store.projects.filter((p) => p.isFeatured).slice(0, 3))
+const socialLinks = computed(() => {
+  try { return JSON.parse(store.profile?.socialLinks || '[]') } catch { return [] }
+})
+const nowItems = computed(() => {
+  try { return JSON.parse(store.profile?.nowItems || '[]') } catch { return [] }
+})
 onMounted(() => { if (!store.siteConfig) store.loadAll() })
 </script>

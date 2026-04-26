@@ -266,3 +266,11 @@
 - Added NowPanel component for real personal homepage content.
 - Replaced generic focus cards on homepage with concrete Now and Social modules.
 - Redeployed production frontend.
+
+### 2026-04-27 首页模块 CMS 化
+
+- Added `nowItems` field to profile config.
+- Homepage NowPanel now reads backend profile config JSON.
+- Homepage SocialRail now reads backend profile config JSON.
+- Admin profile tab now supports editing Social Links JSON and Now Board JSON.
+- Redeployed production frontend.

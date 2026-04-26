@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { prisma } from '../services/prisma.js'
 
-const fields = ['headline', 'bio', 'status', 'tags', 'techStack', 'socialLinks'] as const
+const fields = ['headline', 'bio', 'status', 'tags', 'techStack', 'socialLinks', 'nowItems'] as const
 
 export async function profileRoutes(app: FastifyInstance) {
   app.get('/', async () => prisma.profileConfig.upsert({ where: { id: 1 }, create: {}, update: {} }))

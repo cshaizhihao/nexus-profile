@@ -97,6 +97,8 @@
           <label class="field"><span>当前状态</span><input v-model="profileForm.status" /></label>
           <label class="field"><span>身份标签，逗号分隔</span><input v-model="profileForm.tags" /></label>
           <label class="field"><span>技术栈，逗号分隔</span><input v-model="profileForm.techStack" /></label>
+          <label class="field"><span>社交链接 JSON</span><textarea v-model="profileForm.socialLinks" rows="6" /></label>
+          <label class="field"><span>Now Board JSON</span><textarea v-model="profileForm.nowItems" rows="6" /></label>
           <button class="primary-btn">保存个人档案</button>
         </form>
 
@@ -153,7 +155,15 @@ const currentTitle = computed(() => tabs.find((tab) => tab.key === activeTab.val
 const siteForm = reactive({ title: '', subtitle: '', description: '', avatarUrl: '', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' })
 const categoryForm = reactive({ name: '', sortOrder: 0 })
 const linkForm = reactive({ categoryId: 0, title: '', url: '', description: '', iconUrl: '', iconType: 'external', sortOrder: 0, isVisible: true })
-const profileForm = reactive({ headline: '', bio: '', status: '', tags: '', techStack: '', socialLinks: '[]' })
+const profileForm = reactive({
+  headline: '',
+  bio: '',
+  status: '',
+  tags: '',
+  techStack: '',
+  socialLinks: '[{"type":"Code","label":"GitHub","href":"https://github.com/cshaizhihao"}]',
+  nowItems: '[{"kicker":"Focus","title":"整理入口","desc":"把真正高频使用的服务放到清晰位置。"}]',
+})
 const projectForm = reactive({ title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true })
 
 watch(() => store.siteConfig, (config) => { if (config) Object.assign(siteForm, { title: config.title, subtitle: config.subtitle, description: config.description, avatarUrl: config.avatarUrl || '', backgroundType: config.backgroundType, backgroundValue: config.backgroundValue, customCss: config.customCss }) }, { immediate: true })

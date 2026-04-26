@@ -81,6 +81,7 @@ model ProfileConfig {
   tags        String   @default("Developer,Creator,Builder")
   techStack   String   @default("Vue,Fastify,Prisma,Docker,Nginx")
   socialLinks String   @default("[]")
+  nowItems    String   @default("[]")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
