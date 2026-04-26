@@ -18,9 +18,9 @@
 import { computed } from 'vue'
 const props = defineProps<{ links?: Array<{ type: string; label: string; href: string; enabled?: boolean; iconUrl?: string }> }>()
 const fallback: Array<{ type: string; label: string; href: string; enabled?: boolean; iconUrl?: string }> = [
-  { type: 'Code', label: 'GitHub', href: 'https://github.com/cshaizhihao' },
-  { type: 'Archive', label: 'Projects', href: '/projects' },
-  { type: 'Gateway', label: 'Navigation', href: '/navigation' },
+  { type: 'Code', label: 'GitHub', href: 'https://github.com/cshaizhihao', iconUrl: '/art/nebula-grid.svg' },
+  { type: 'Archive', label: 'Projects', href: '/projects', iconUrl: '/art/liquid-orbit.svg' },
+  { type: 'Gateway', label: 'Navigation', href: '/navigation', iconUrl: '/art/editorial-wave.svg' },
 ]
 const visibleLinks = computed(() => { const source = props.links?.length ? props.links : fallback; return source.filter((item: any) => item.enabled !== false) })
 </script>

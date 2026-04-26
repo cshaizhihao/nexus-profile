@@ -343,3 +343,11 @@
 - Reworked profile page into a cleaner dossier layout.
 - Added structural page classes for hero, metrics, strips, grids and panels.
 - Redeployed production frontend after long-form approval.
+
+### 2026-04-27 美术资源与玻璃质感补强
+
+- Added abstract built-in art assets for projects/social fallback imagery.
+- Refined liquid glass surfaces with stronger layered highlights, internal edge light and better depth.
+- Added sheen transitions on cards and controls.
+- Improved project media treatment and page transition feel.
+- Redeployed production frontend.

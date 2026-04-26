@@ -11,8 +11,7 @@
     </div>
     <div v-if="store.projects.length" class="projects-grid">
       <a v-for="(item, index) in store.projects" :key="item.id" :href="item.url || '#'" target="_blank" rel="noreferrer" class="archive-card project-panel group" :class="index === 0 ? 'project-panel-main' : ''">
-        <div v-if="item.imageUrl" class="project-media"><img :src="item.imageUrl" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></div>
-        <div v-else class="project-media project-fallback"><span>{{ item.title.slice(0, 1) }}</span></div>
+        <div class="project-media"><img :src="item.imageUrl || artFor(index)" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" /></div>
         <p class="kicker mt-5">{{ item.type }}</p>
         <h2>{{ item.title }}</h2>
         <p>{{ item.description }}</p>
@@ -30,5 +29,7 @@
 import { onMounted } from 'vue'
 import { useSiteStore } from '../stores/site'
 const store = useSiteStore()
+const art = ['/art/nebula-grid.svg', '/art/liquid-orbit.svg', '/art/editorial-wave.svg']
+function artFor(index: number) { return art[index % art.length] }
 onMounted(() => { if (!store.siteConfig) store.loadAll() })
 </script>
