@@ -24,9 +24,11 @@
         <Transition name="page" mode="out-in"><component :is="Component" /></Transition>
       </RouterView>
     </main>
+    <QuickDock />
   </div>
 </template>
 
 <script setup lang="ts">
 import CustomCssInjector from '../components/CustomCssInjector.vue'
+import QuickDock from '../components/QuickDock.vue'
 </script>

@@ -1,54 +1,61 @@
 <template>
   <section class="grid gap-8">
-    <div class="grid gap-6 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
-      <div>
+    <HomeMarquee />
+
+    <div class="grid gap-6 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
+      <div class="hero-reveal">
         <p class="kicker">Personal archive · curated gateway</p>
         <h1 class="display-title mt-5">{{ titleParts[0] }}<br />{{ titleParts[1] || 'Archive' }}</h1>
+        <p class="mt-6 max-w-xl text-xl leading-9 text-stone-600">{{ profile?.bio || '把身份、作品、入口和当前状态放进一个安静但有辨识度的数字空间。' }}</p>
       </div>
-      <div class="archive-card p-7 md:p-8">
+      <div class="archive-card hero-reveal-delay p-7 md:p-8">
         <div class="flex items-start justify-between gap-5">
           <div>
-            <p class="kicker">Now</p>
-            <p class="mt-4 text-2xl leading-tight tracking-[-0.03em]">{{ profile?.status || '构建、整理、发布。' }}</p>
+            <p class="kicker">Current signal</p>
+            <p class="mt-4 text-3xl leading-tight tracking-[-0.04em]">{{ profile?.status || '整理长期链接，打磨个人入口。' }}</p>
           </div>
-          <div class="mono rounded-full border border-stone-950/10 px-3 py-1 text-xs text-stone-500">GMT+8</div>
+          <div class="mono rounded-full border border-stone-950/10 px-3 py-1 text-xs text-stone-500">LIVE</div>
         </div>
         <div class="rule my-7" />
-        <p class="text-lg leading-8 text-stone-600">{{ config?.description || profile?.bio || '一个用于展示身份、项目、链接与当前状态的数字主页。' }}</p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <RouterLink to="/navigation" class="primary-btn">进入导航</RouterLink>
-          <RouterLink to="/projects" class="ghost-btn">看项目</RouterLink>
-          <RouterLink to="/profile" class="ghost-btn">读档案</RouterLink>
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div><p class="text-3xl tracking-[-0.05em]">{{ store.visibleLinks.length }}</p><p class="mono mt-1 text-[10px] uppercase tracking-[.18em] text-stone-500">Links</p></div>
+          <div><p class="text-3xl tracking-[-0.05em]">{{ store.projects.length }}</p><p class="mono mt-1 text-[10px] uppercase tracking-[.18em] text-stone-500">Works</p></div>
+          <div><p class="text-3xl tracking-[-0.05em]">{{ store.categories.length }}</p><p class="mono mt-1 text-[10px] uppercase tracking-[.18em] text-stone-500">Groups</p></div>
         </div>
       </div>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-4">
-      <article class="bento-card md:col-span-2 md:row-span-2">
-        <p class="kicker">Identity</p>
-        <h2 class="mt-6 max-w-xl text-4xl leading-none tracking-[-0.05em]">{{ config?.subtitle || '不是说明书，是一个人的入口。' }}</h2>
-        <p class="mt-6 leading-8 text-stone-600">{{ profile?.bio || '把个人介绍、作品、服务入口和长期维护的链接收束在一个克制而清晰的界面里。' }}</p>
-      </article>
-      <RouterLink to="/navigation" class="bento-card block">
-        <p class="kicker">Links</p>
-        <p class="mt-5 text-5xl tracking-[-0.06em]">{{ store.visibleLinks.length }}</p>
-        <p class="mt-2 text-stone-500">精选链接</p>
+    <div class="grid gap-4 md:grid-cols-6">
+      <RouterLink to="/navigation" class="bento-card link-orb block md:col-span-3 md:row-span-2">
+        <p class="kicker">Gateway</p>
+        <h2 class="relative z-10 mt-8 max-w-lg text-5xl leading-none tracking-[-0.06em]">常用入口，不再散落在浏览器角落。</h2>
+        <p class="relative z-10 mt-6 max-w-md leading-8 text-stone-600">按分类收纳真实会用到的链接，并持续检测它们是否还活着。</p>
       </RouterLink>
-      <RouterLink to="/projects" class="bento-card block">
+
+      <RouterLink to="/projects" class="bento-card link-orb block md:col-span-3">
         <p class="kicker">Works</p>
-        <p class="mt-5 text-5xl tracking-[-0.06em]">{{ store.projects.length }}</p>
-        <p class="mt-2 text-stone-500">项目作品</p>
+        <h2 class="relative z-10 mt-5 text-4xl tracking-[-0.05em]">作品、项目、长期资产。</h2>
       </RouterLink>
-      <article class="bento-card md:col-span-2">
-        <p class="kicker">Featured routes</p>
-        <div class="mt-5 grid gap-3 sm:grid-cols-3">
-          <RouterLink v-for="route in routes" :key="route.to" :to="route.to" class="rounded-2xl border border-stone-950/10 bg-white/25 p-4 transition hover:bg-stone-950 hover:text-white">
-            <span class="mono text-xs">{{ route.no }}</span>
-            <p class="mt-3 text-xl">{{ route.label }}</p>
-          </RouterLink>
-        </div>
+
+      <RouterLink to="/profile" class="bento-card block md:col-span-2">
+        <p class="kicker">Dossier</p>
+        <h2 class="mt-5 text-3xl tracking-[-0.05em]">档案</h2>
+        <p class="mt-3 text-stone-500">身份标签与当前状态。</p>
+      </RouterLink>
+
+      <article class="bento-card md:col-span-1">
+        <p class="kicker">Theme</p>
+        <p class="mt-5 text-3xl tracking-[-0.05em]">Archive</p>
       </article>
     </div>
+
+    <section class="grid gap-4 md:grid-cols-3">
+      <article v-for="item in focus" :key="item.title" class="archive-card p-6">
+        <p class="kicker">{{ item.kicker }}</p>
+        <h3 class="mt-4 text-2xl tracking-[-0.04em]">{{ item.title }}</h3>
+        <p class="mt-3 leading-7 text-stone-600">{{ item.desc }}</p>
+      </article>
+    </section>
 
     <section v-if="featuredProjects.length" class="archive-card p-7 md:p-8">
       <div class="mb-6 flex items-end justify-between gap-4">
@@ -68,6 +75,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
+import HomeMarquee from '../components/HomeMarquee.vue'
 import { useSiteStore } from '../stores/site'
 
 const store = useSiteStore()
@@ -75,10 +83,10 @@ const config = computed(() => store.siteConfig)
 const profile = computed(() => store.profile)
 const titleParts = computed(() => (config.value?.title || 'Zaki Archive').split(' '))
 const featuredProjects = computed(() => store.projects.filter((p) => p.isFeatured).slice(0, 3))
-const routes = [
-  { no: '01', label: '导航中心', to: '/navigation' },
-  { no: '02', label: '项目作品', to: '/projects' },
-  { no: '03', label: '个人档案', to: '/profile' },
+const focus = [
+  { kicker: 'Now', title: '现在关注什么', desc: '用一个轻量状态位记录当前正在做的事，而不是让主页停留在静态名片。' },
+  { kicker: 'Routes', title: '入口有秩序', desc: '把常用服务、项目地址和外部身份整理成可维护的路径。' },
+  { kicker: 'Taste', title: '保留审美判断', desc: '少一点模板味，多一点个人气质；克制但不无聊。' },
 ]
 
 onMounted(() => { if (!store.siteConfig) store.loadAll() })

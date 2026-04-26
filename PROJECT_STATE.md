@@ -212,3 +212,12 @@
 - Reworked navigation, projects and profile pages with coherent visual language.
 - Improved mobile navigation with horizontal scroll.
 - Redeployed production frontend.
+
+### 2026-04-26 前端二次打磨
+
+- Added ambient marquee for archive identity.
+- Added floating quick dock for core routes.
+- Reworked homepage with stronger personal meaning: current signal, counters, gateway card, works card and focus cards.
+- Added page reveal animation and hover orb detail.
+- Improved mobile bottom dock behavior.
+- Redeployed production frontend.
