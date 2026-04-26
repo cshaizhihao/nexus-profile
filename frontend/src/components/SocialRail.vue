@@ -15,11 +15,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-const props = defineProps<{ links?: Array<{ type: string; label: string; href: string }> }>()
+const props = defineProps<{ links?: Array<{ type: string; label: string; href: string; enabled?: boolean }> }>()
 const fallback = [
   { type: 'Code', label: 'GitHub', href: 'https://github.com/cshaizhihao' },
   { type: 'Archive', label: 'Projects', href: '/projects' },
   { type: 'Gateway', label: 'Navigation', href: '/navigation' },
 ]
-const visibleLinks = computed(() => props.links?.length ? props.links : fallback)
+const visibleLinks = computed(() => { const source = props.links?.length ? props.links : fallback; return source.filter((item: any) => item.enabled !== false) })
 </script>

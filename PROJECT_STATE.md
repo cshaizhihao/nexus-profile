@@ -283,3 +283,11 @@
 - Added live preview block for homepage module content inside admin.
 - Save action serializes form state back into JSON for backend compatibility.
 - Redeployed production frontend.
+
+### 2026-04-27 三轮并行优化交付
+
+- Added visible toggle + manual ordering for Social links.
+- Added visible toggle + manual ordering for Now board cards.
+- Upgraded live preview from simple text blocks to a homepage-like split preview panel.
+- Preserved backend JSON compatibility while moving editing to structured UI.
+- Redeployed production frontend.
