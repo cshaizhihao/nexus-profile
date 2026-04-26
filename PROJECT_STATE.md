@@ -258,3 +258,11 @@
 - Added lightweight MagneticCard interaction.
 - Applied magnetic interaction to homepage main route cards.
 - Redeployed production frontend.
+
+### 2026-04-27 设计系统与真实内容模块
+
+- Added DESIGN_SYSTEM.md to freeze visual direction, tokens and component rules.
+- Added SocialRail component for external identity links.
+- Added NowPanel component for real personal homepage content.
+- Replaced generic focus cards on homepage with concrete Now and Social modules.
+- Redeployed production frontend.

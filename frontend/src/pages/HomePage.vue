@@ -49,13 +49,8 @@
       </article></MagneticCard>
     </div>
 
-    <section class="reveal-stack grid gap-4 md:grid-cols-3">
-      <article v-for="(item, index) in focus" :key="item.title" class="archive-card depth-card p-6" :style="{ '--d': index + 4 }">
-        <p class="kicker">{{ item.kicker }}</p>
-        <h3 class="mt-4 text-2xl tracking-[-0.04em]">{{ item.title }}</h3>
-        <p class="mt-3 leading-7 text-stone-600">{{ item.desc }}</p>
-      </article>
-    </section>
+    <NowPanel />
+    <SocialRail />
 
     <section v-if="featuredProjects.length" class="archive-card depth-card p-7 md:p-8">
       <div class="mb-6 flex items-end justify-between gap-4">
@@ -78,6 +73,8 @@ import { computed, onMounted } from 'vue'
 import HomeMarquee from '../components/HomeMarquee.vue'
 import MagneticCard from '../components/MagneticCard.vue'
 import KineticTitle from '../components/KineticTitle.vue'
+import NowPanel from '../components/NowPanel.vue'
+import SocialRail from '../components/SocialRail.vue'
 import { useSiteStore } from '../stores/site'
 
 const store = useSiteStore()
@@ -85,11 +82,5 @@ const config = computed(() => store.siteConfig)
 const profile = computed(() => store.profile)
 const displayName = computed(() => config.value?.title || 'Zaki Archive')
 const featuredProjects = computed(() => store.projects.filter((p) => p.isFeatured).slice(0, 3))
-const focus = [
-  { kicker: 'Now', title: '现在关注什么', desc: '用一个轻量状态位记录当前正在做的事，而不是让主页停留在静态名片。' },
-  { kicker: 'Routes', title: '入口有秩序', desc: '把常用服务、项目地址和外部身份整理成可维护的路径。' },
-  { kicker: 'Taste', title: '保留审美判断', desc: '少一点模板味，多一点个人气质；克制但不无聊。' },
-]
-
 onMounted(() => { if (!store.siteConfig) store.loadAll() })
 </script>
