@@ -2,6 +2,8 @@
 
 A modern, minimal, front-end/back-end separated personal homepage and navigation CMS.
 
+Repository: <https://github.com/cshaizhihao/nexus-profile>
+
 > Status: Phase 0/1 scaffold in progress. Preview screenshots will be added after the first visual milestone.
 
 ## Features

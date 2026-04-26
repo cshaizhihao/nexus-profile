@@ -6,6 +6,7 @@
 - Concept: Modern, minimal, self-display oriented personal homepage and navigation CMS
 - Architecture: Frontend/backend separated
 - Repository directory: `/root/.openclaw/workspace/nexus-profile`
+- GitHub repository: `https://github.com/cshaizhihao/nexus-profile`
 
 ## Tech Stack
 
@@ -58,6 +59,8 @@
 - [x] Validated backend TypeScript build
 - [x] Started local frontend/backend preview
 - [x] Validated backend health endpoint
+- [x] Created GitHub repository
+- [x] Pushed local `main` branch to GitHub
 
 ## In Progress
 
@@ -116,3 +119,4 @@
 - Created Git commits:
   - `438305f chore: initialize nexus profile project structure`
   - `4884106 fix: stabilize scaffold build and local preview`
+- Created and pushed GitHub repository: `https://github.com/cshaizhihao/nexus-profile`
