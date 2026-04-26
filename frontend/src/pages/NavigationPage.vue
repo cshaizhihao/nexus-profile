@@ -5,21 +5,21 @@
         <p class="kicker">Curated gateway</p>
         <h1 class="mt-4 text-6xl leading-none tracking-[-0.07em] md:text-8xl">导航<br />索引</h1>
       </div>
-      <div class="archive-card hero-reveal-delay p-5">
+      <div class="archive-card depth-card hero-reveal-delay p-5">
         <p class="text-sm leading-6 text-stone-500">把真正会反复抵达的入口整理成路径。搜索、分类、状态，一眼可达。</p>
         <input v-model="keyword" class="mt-5 w-full rounded-full border border-stone-950/10 bg-white/50 px-5 py-3 outline-none transition focus:border-stone-950/30" placeholder="搜索链接、描述或地址..." />
       </div>
     </div>
 
     <div class="grid gap-4 md:grid-cols-4">
-      <article class="archive-card p-5"><p class="kicker">Categories</p><p class="mt-3 text-4xl tracking-[-0.05em]">{{ store.categories.length }}</p></article>
-      <article class="archive-card p-5"><p class="kicker">Visible links</p><p class="mt-3 text-4xl tracking-[-0.05em]">{{ store.visibleLinks.length }}</p></article>
-      <article class="archive-card p-5 md:col-span-2"><p class="kicker">Health</p><p class="mt-3 text-2xl tracking-[-0.04em]">{{ healthSummary }}</p></article>
+      <article class="archive-card depth-card p-5"><p class="kicker">Categories</p><p class="mt-3 text-4xl tracking-[-0.05em]">{{ store.categories.length }}</p></article>
+      <article class="archive-card depth-card p-5"><p class="kicker">Visible links</p><p class="mt-3 text-4xl tracking-[-0.05em]">{{ store.visibleLinks.length }}</p></article>
+      <article class="archive-card depth-card p-5 md:col-span-2"><p class="kicker">Health</p><p class="mt-3 text-2xl tracking-[-0.04em]">{{ healthSummary }}</p></article>
     </div>
 
-    <div v-if="store.loading" class="archive-card p-8 text-stone-500">正在加载导航数据...</div>
+    <div v-if="store.loading" class="archive-card depth-card p-8 text-stone-500">正在加载导航数据...</div>
     <div v-else-if="filteredGroups.length" class="grid gap-8">
-      <section v-for="group in filteredGroups" :key="group.id" class="archive-card p-6 md:p-7">
+      <section v-for="group in filteredGroups" :key="group.id" class="archive-card depth-card p-6 md:p-7">
         <div class="mb-5 flex items-center justify-between gap-3">
           <div><p class="kicker">Category</p><h2 class="mt-2 text-3xl tracking-[-0.04em]">{{ group.name }}</h2></div>
           <span class="mono rounded-full border border-stone-950/10 px-3 py-1 text-xs text-stone-500">{{ group.links.length }} links</span>
@@ -36,7 +36,7 @@
         </div>
       </section>
     </div>
-    <div v-else class="archive-card grid gap-5 p-8 text-stone-500">
+    <div v-else class="archive-card depth-card grid gap-5 p-8 text-stone-500">
       <p class="text-2xl tracking-[-0.04em] text-stone-800">这里还没有入口。</p>
       <p>去后台添加第一组导航分类和链接，这一页会自动变成你的入口索引。</p>
       <RouterLink to="/admin" class="primary-btn w-max">进入后台</RouterLink>

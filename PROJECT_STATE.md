@@ -237,3 +237,13 @@
 - Reworked admin shell visual style to match the personal archive frontend.
 - Replaced generic admin white cards with archive-style surfaces.
 - Redeployed production frontend.
+
+### 2026-04-26 大步视觉特效升级
+
+- Added global animated archive atmosphere: drifting orbs, scanlines and constellation dots.
+- Added custom cursor aura with eased pointer following.
+- Added kinetic typography component for hero title glyph reveal.
+- Added card sheen and depth interactions.
+- Added stacked reveal animations and slow floating hero card.
+- Applied depth-card interactions across homepage and key subpages.
+- Redeployed production frontend.

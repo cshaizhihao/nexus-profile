@@ -1,5 +1,7 @@
 <template>
   <CustomCssInjector />
+  <ArchiveAtmosphere />
+  <CursorAura />
   <div class="shell">
     <header class="topbar">
       <nav class="nav-wrap">
@@ -29,6 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import ArchiveAtmosphere from '../components/ArchiveAtmosphere.vue'
+import CursorAura from '../components/CursorAura.vue'
 import CustomCssInjector from '../components/CustomCssInjector.vue'
 import QuickDock from '../components/QuickDock.vue'
 </script>
