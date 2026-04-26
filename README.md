@@ -8,6 +8,9 @@ Repository: <https://github.com/cshaizhihao/nexus-profile>
 
 ## Features
 
+Nexus Profile / 星枢主页 是一个前后端分离、可自部署、可后台管理的个人数字主页系统。它不仅是导航页，也用于承载个人档案、项目作品、链接中心和数字身份展示。
+
+
 - Vue 3 + Vite + TypeScript frontend
 - Vue Router based multi-page structure, no one-page waterfall layout
 - Fastify + Prisma backend API
@@ -98,3 +101,10 @@ All CMS write APIs and image uploads require `Authorization: Bearer <ADMIN_TOKEN
 ## Link Health Check
 
 The CMS can check one link or all links and stores health status, HTTP code and check time. Write operations require admin login.
+
+## Product Documents
+
+- [Product Audit](./PRODUCT_AUDIT.md)
+- [Roadmap](./ROADMAP.md)
+- [Contributing](./CONTRIBUTING.md)
+- [Security](./SECURITY.md)

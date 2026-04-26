@@ -177,3 +177,11 @@
 - Added health status display in the admin link list.
 - Added homepage Bento showcase component.
 - Redeployed production frontend and restarted backend.
+
+### 2026-04-26 产品完整度补强
+
+- Added PRODUCT_AUDIT.md with product diagnosis and priority model.
+- Added ROADMAP.md with v0.1.0/v0.2.0/v0.3.0 plan.
+- Added LICENSE, CONTRIBUTING.md and SECURITY.md.
+- Added `/projects` and `/profile` routes as productized information architecture.
+- Updated homepage CTAs to point to navigation center, projects and admin.

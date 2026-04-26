@@ -10,6 +10,8 @@
         <div class="flex items-center gap-1 rounded-full bg-slate-100 p-1 text-sm text-slate-600">
           <RouterLink class="nav-pill" to="/">主页</RouterLink>
           <RouterLink class="nav-pill" to="/navigation">导航</RouterLink>
+          <RouterLink class="nav-pill" to="/projects">项目</RouterLink>
+          <RouterLink class="nav-pill" to="/profile">档案</RouterLink>
           <RouterLink class="nav-pill" to="/about">关于</RouterLink>
           <RouterLink class="nav-pill" to="/admin">后台</RouterLink>
         </div>

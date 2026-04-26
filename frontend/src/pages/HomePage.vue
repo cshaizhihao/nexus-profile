@@ -6,8 +6,9 @@
       <p class="mt-3 text-2xl font-medium text-slate-500">{{ config?.subtitle || '星枢主页' }}</p>
       <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">{{ config?.description || '前后端分离、CMS 可配置、支持背景与自定义 CSS。动效克制，结构清晰，不做廉价长滚动。' }}</p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <RouterLink to="/navigation" class="rounded-full bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-xl">查看导航</RouterLink>
-        <RouterLink to="/admin" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300">进入后台</RouterLink>
+        <RouterLink to="/navigation" class="rounded-full bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-xl">进入导航中心</RouterLink>
+        <RouterLink to="/projects" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300">查看项目作品</RouterLink>
+        <RouterLink to="/admin" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300">管理后台</RouterLink>
       </div>
     </div>
 

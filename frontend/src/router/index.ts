@@ -3,6 +3,8 @@ import PublicLayout from '../layouts/PublicLayout.vue'
 import HomePage from '../pages/HomePage.vue'
 import NavigationPage from '../pages/NavigationPage.vue'
 import AboutPage from '../pages/AboutPage.vue'
+import ProjectsPage from '../pages/ProjectsPage.vue'
+import ProfilePage from '../pages/ProfilePage.vue'
 import AdminPage from '../pages/AdminPage.vue'
 
 const router = createRouter({
@@ -14,6 +16,8 @@ const router = createRouter({
       children: [
         { path: '', name: 'home', component: HomePage },
         { path: 'navigation', name: 'navigation', component: NavigationPage },
+        { path: 'projects', name: 'projects', component: ProjectsPage },
+        { path: 'profile', name: 'profile', component: ProfilePage },
         { path: 'about', name: 'about', component: AboutPage },
         { path: 'admin', name: 'admin', component: AdminPage },
       ],
