@@ -334,3 +334,12 @@
 - Added modern structural page classes and responsive layout system.
 - Switched typography/color language toward sharper high-fashion tech editorial direction.
 - Redeployed production frontend.
+
+### 2026-04-27 Modern editorial page system rollout
+
+- Reworked homepage hero into a stronger editorial composition.
+- Reworked navigation page into a sharper index surface.
+- Reworked projects page into a more portfolio-like grid.
+- Reworked profile page into a cleaner dossier layout.
+- Added structural page classes for hero, metrics, strips, grids and panels.
+- Redeployed production frontend after long-form approval.
