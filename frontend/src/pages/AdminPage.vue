@@ -74,7 +74,7 @@
           <div class="grid gap-3"><article v-for="category in store.categories" :key="category.id" class="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/70 p-4"><div><h3 class="font-semibold">{{ category.name }}</h3><p class="text-sm text-slate-400">排序：{{ category.sortOrder }}</p></div><div class="flex gap-2"><button class="ghost-btn" @click="editCategory(category)">编辑</button><button class="danger-btn" @click="removeCategory(category.id)">删除</button></div></article></div>
         </div>
 
-        <div v-else class="grid gap-6">
+        <div v-else-if="activeTab === 'links'" class="grid gap-6">
           <div class="flex flex-wrap gap-3"><button class="primary-btn" @click="checkAllLinks">检测全部链接</button><RouterLink to="/navigation" class="ghost-btn">预览导航页</RouterLink></div>
           <form class="grid gap-4 md:grid-cols-2" @submit.prevent="saveLink">
             <label class="field"><span>所属分类</span><select v-model.number="linkForm.categoryId"><option v-for="category in store.categories" :key="category.id" :value="category.id">{{ category.name }}</option></select></label>
@@ -90,6 +90,38 @@
           </form>
           <div class="grid gap-3"><article v-for="link in store.links" :key="link.id" class="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white/70 p-4"><div class="flex items-center gap-3"><img v-if="link.iconUrl" :src="link.iconUrl" class="h-10 w-10 rounded-xl object-cover" /><div><h3 class="font-semibold">{{ link.title }}</h3><p class="break-all text-sm text-slate-400">{{ link.url }}</p><p class="mt-1 text-xs text-slate-400">状态：<span :class="healthClass(link.healthStatus)">{{ healthLabel(link.healthStatus) }}</span><span v-if="link.healthCode"> · {{ link.healthCode }}</span></p></div></div><div class="flex gap-2"><button class="ghost-btn" @click="checkLink(link.id)">检测</button><button class="ghost-btn" @click="editLink(link)">编辑</button><button class="danger-btn" @click="removeLink(link.id)">删除</button></div></article></div>
         </div>
+
+        <form v-else-if="activeTab === 'profile'" class="grid gap-4" @submit.prevent="saveProfile">
+          <label class="field"><span>档案标题</span><input v-model="profileForm.headline" /></label>
+          <label class="field"><span>个人简介</span><textarea v-model="profileForm.bio" rows="4" /></label>
+          <label class="field"><span>当前状态</span><input v-model="profileForm.status" /></label>
+          <label class="field"><span>身份标签，逗号分隔</span><input v-model="profileForm.tags" /></label>
+          <label class="field"><span>技术栈，逗号分隔</span><input v-model="profileForm.techStack" /></label>
+          <button class="primary-btn">保存个人档案</button>
+        </form>
+
+        <div v-else-if="activeTab === 'projects'" class="grid gap-6">
+          <form class="grid gap-4 md:grid-cols-2" @submit.prevent="saveProject">
+            <label class="field"><span>项目标题</span><input v-model="projectForm.title" /></label>
+            <label class="field"><span>类型</span><input v-model="projectForm.type" /></label>
+            <label class="field md:col-span-2"><span>描述</span><textarea v-model="projectForm.description" rows="3" /></label>
+            <label class="field"><span>链接</span><input v-model="projectForm.url" /></label>
+            <label class="field"><span>封面图</span><input v-model="projectForm.imageUrl" /></label>
+            <label class="field"><span>排序</span><input v-model.number="projectForm.sortOrder" type="number" /></label>
+            <label class="flex items-center gap-3 text-sm text-slate-600"><input v-model="projectForm.isFeatured" type="checkbox" /> 精选展示</label>
+            <button class="primary-btn md:col-span-2">{{ editingProjectId ? '保存项目' : '新增项目' }}</button>
+          </form>
+          <article v-for="project in store.projects" :key="project.id" class="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/70 p-4">
+            <div><h3 class="font-semibold">{{ project.title }}</h3><p class="text-sm text-slate-400">{{ project.type }}</p></div>
+            <div class="flex gap-2"><button class="ghost-btn" @click="editProject(project)">编辑</button><button class="danger-btn" @click="removeProject(project.id)">删除</button></div>
+          </article>
+        </div>
+
+        <div v-else-if="activeTab === 'data'" class="grid gap-4">
+          <p class="leading-7 text-slate-600">导出当前站点配置、个人档案、导航与项目数据，用于备份或迁移。</p>
+          <button class="primary-btn" @click="exportData">导出 JSON</button>
+          <textarea v-if="exportText" class="min-h-80 rounded-2xl border border-slate-200 bg-white/70 p-4 font-mono text-xs" :value="exportText" readonly />
+        </div>
       </template>
     </div>
   </section>
@@ -98,17 +130,19 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import AdminStatCard from '../components/AdminStatCard.vue'
-import { api, auth, type NavCategory, type NavLink } from '../api/client'
+import { api, auth, contentApi, type NavCategory, type NavLink, type Project } from '../api/client'
 import { useSiteStore } from '../stores/site'
 
 const store = useSiteStore()
-const activeTab = ref<'overview' | 'site' | 'categories' | 'links'>('overview')
+const activeTab = ref<'overview' | 'site' | 'categories' | 'links' | 'profile' | 'projects' | 'data'>('overview')
 const message = ref('')
 const password = ref('')
 const loggedIn = ref(auth.isLoggedIn())
 const editingCategoryId = ref<number | null>(null)
 const editingLinkId = ref<number | null>(null)
-const tabs = [{ key: 'overview', label: '概览' }, { key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }] as const
+const editingProjectId = ref<number | null>(null)
+const exportText = ref('')
+const tabs = [{ key: 'overview', label: '概览' }, { key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }, { key: 'profile', label: '个人档案' }, { key: 'projects', label: '项目作品' }, { key: 'data', label: '数据导出' }] as const
 const themes = [
   { name: '极简浅色', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' },
   { name: '深空暗色', backgroundType: 'gradient', backgroundValue: 'linear-gradient(135deg,#020617,#111827)', customCss: 'body { color-scheme: dark; } .bg-white\\/75,.bg-white\\/70 { background: rgba(15,23,42,.72); color: #e5e7eb; border-color: rgba(148,163,184,.24); } .text-slate-950 { color: #f8fafc; } .text-slate-600,.text-slate-500 { color: #cbd5e1; }' },
@@ -119,8 +153,11 @@ const currentTitle = computed(() => tabs.find((tab) => tab.key === activeTab.val
 const siteForm = reactive({ title: '', subtitle: '', description: '', avatarUrl: '', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' })
 const categoryForm = reactive({ name: '', sortOrder: 0 })
 const linkForm = reactive({ categoryId: 0, title: '', url: '', description: '', iconUrl: '', iconType: 'external', sortOrder: 0, isVisible: true })
+const profileForm = reactive({ headline: '', bio: '', status: '', tags: '', techStack: '', socialLinks: '[]' })
+const projectForm = reactive({ title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true })
 
 watch(() => store.siteConfig, (config) => { if (config) Object.assign(siteForm, { title: config.title, subtitle: config.subtitle, description: config.description, avatarUrl: config.avatarUrl || '', backgroundType: config.backgroundType, backgroundValue: config.backgroundValue, customCss: config.customCss }) }, { immediate: true })
+watch(() => store.profile, (profile) => { if (profile) Object.assign(profileForm, profile) }, { immediate: true })
 watch(() => store.categories, (categories) => { if (!linkForm.categoryId && categories[0]) linkForm.categoryId = categories[0].id }, { immediate: true })
 async function loadAll() { await store.loadAll() }
 function flash(text: string) { message.value = text; setTimeout(() => (message.value = ''), 2200) }
@@ -142,5 +179,11 @@ async function checkAllLinks() { await api.checkAllLinks(); await loadAll(); fla
 function healthLabel(status: string) { return { ok: '正常', broken: '失效', timeout: '超时', unknown: '未检测' }[status] || status }
 function healthClass(status: string) { return status === 'ok' ? 'text-emerald-600' : status === 'unknown' ? 'text-slate-400' : 'text-rose-600' }
 async function removeLink(id: number) { await api.deleteLink(id); await loadAll(); flash('导航链接已删除') }
+async function saveProfile() { await contentApi.updateProfile(profileForm); await loadAll(); flash('个人档案已保存') }
+function editProject(project: Project) { editingProjectId.value = project.id; Object.assign(projectForm, project) }
+function resetProjectForm() { editingProjectId.value = null; Object.assign(projectForm, { title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true }) }
+async function saveProject() { editingProjectId.value ? await contentApi.updateProject(editingProjectId.value, projectForm) : await contentApi.createProject(projectForm); resetProjectForm(); await loadAll(); flash('项目已保存') }
+async function removeProject(id: number) { await contentApi.deleteProject(id); await loadAll(); flash('项目已删除') }
+async function exportData() { exportText.value = JSON.stringify(await contentApi.exportData(), null, 2); flash('数据已导出') }
 onMounted(loadAll)
 </script>

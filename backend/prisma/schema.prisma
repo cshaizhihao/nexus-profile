@@ -58,3 +58,29 @@ model Asset {
   size      Int
   createdAt DateTime @default(now())
 }
+
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  type        String   @default("Project")
+  description String   @default("")
+  url         String?
+  imageUrl    String?
+  sortOrder   Int      @default(0)
+  isFeatured  Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProfileConfig {
+  id          Int      @id @default(1)
+  headline    String   @default("个人档案")
+  bio         String   @default("这里用于承载个人简介、身份标签、社交链接、技术栈和当前状态。")
+  status      String   @default("正在构建一个更完整的个人主页系统。")
+  tags        String   @default("Developer,Creator,Builder")
+  techStack   String   @default("Vue,Fastify,Prisma,Docker,Nginx")
+  socialLinks String   @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

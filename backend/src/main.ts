@@ -4,6 +4,9 @@ import multipart from '@fastify/multipart'
 import { siteRoutes } from './routes/site.js'
 import { navRoutes } from './routes/nav.js'
 import { uploadRoutes } from './routes/uploads.js'
+import { projectRoutes } from './routes/projects.js'
+import { profileRoutes } from './routes/profile.js'
+import { exportRoutes } from './routes/export.js'
 
 const app = Fastify({ logger: true })
 const port = Number(process.env.PORT || 10081)
@@ -29,6 +32,9 @@ app.post('/api/auth/login', async (request, reply) => {
 await app.register(siteRoutes, { prefix: '/api/site-config' })
 await app.register(navRoutes, { prefix: '/api/nav' })
 await app.register(uploadRoutes)
+await app.register(projectRoutes, { prefix: '/api/projects' })
+await app.register(profileRoutes, { prefix: '/api/profile' })
+await app.register(exportRoutes)
 
 try {
   await app.listen({ port, host: '0.0.0.0' })

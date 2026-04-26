@@ -95,3 +95,34 @@ export const api = {
     return response.json() as Promise<Asset>
   },
 }
+
+export type Project = {
+  id: number
+  title: string
+  type: string
+  description: string
+  url?: string | null
+  imageUrl?: string | null
+  sortOrder: number
+  isFeatured: boolean
+}
+
+export type ProfileConfig = {
+  id: number
+  headline: string
+  bio: string
+  status: string
+  tags: string
+  techStack: string
+  socialLinks: string
+}
+
+export const contentApi = {
+  getProjects: () => request<Project[]>('/api/projects'),
+  createProject: (payload: Partial<Project>) => request<Project>('/api/projects', { method: 'POST', body: JSON.stringify(payload) }, true),
+  updateProject: (id: number, payload: Partial<Project>) => request<Project>(`/api/projects/${id}`, { method: 'PUT', body: JSON.stringify(payload) }, true),
+  deleteProject: (id: number) => request<{ ok: true }>(`/api/projects/${id}`, { method: 'DELETE' }, true),
+  getProfile: () => request<ProfileConfig>('/api/profile'),
+  updateProfile: (payload: Partial<ProfileConfig>) => request<ProfileConfig>('/api/profile', { method: 'PUT', body: JSON.stringify(payload) }, true),
+  exportData: () => request<Record<string, unknown>>('/api/export', { method: 'GET' }, true),
+}

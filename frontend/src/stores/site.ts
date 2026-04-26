@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'
-import { api, type SiteConfig, type NavCategory, type NavLink } from '../api/client'
+import { api, contentApi, type SiteConfig, type NavCategory, type NavLink, type Project, type ProfileConfig } from '../api/client'
 
 export const useSiteStore = defineStore('site', {
   state: () => ({
     siteConfig: null as SiteConfig | null,
     categories: [] as NavCategory[],
     links: [] as NavLink[],
+    projects: [] as Project[],
+    profile: null as ProfileConfig | null,
     loading: false,
     error: '',
   }),
@@ -23,14 +25,18 @@ export const useSiteStore = defineStore('site', {
       this.loading = true
       this.error = ''
       try {
-        const [siteConfig, categories, links] = await Promise.all([
+        const [siteConfig, categories, links, projects, profile] = await Promise.all([
           api.getSiteConfig(),
           api.getCategories(),
           api.getLinks(),
+          contentApi.getProjects(),
+          contentApi.getProfile(),
         ])
         this.siteConfig = siteConfig
         this.categories = categories
         this.links = links
+        this.projects = projects
+        this.profile = profile
       } catch (error) {
         this.error = error instanceof Error ? error.message : 'Failed to load data'
       } finally {

@@ -193,3 +193,13 @@
 - Added quick actions to edit homepage, manage links and preview frontend.
 - Added product completeness reminders in CMS overview.
 - Redeployed production frontend.
+
+### 2026-04-26 内容模型升级
+
+- Added `Project` model and protected project CRUD APIs.
+- Added `ProfileConfig` model and protected profile update API.
+- Added protected data export API: `/api/export`.
+- Projects page now reads project data from backend.
+- Profile page now reads profile data from backend.
+- Admin now includes Profile, Projects and Data Export tabs.
+- Redeployed production frontend and restarted backend.
