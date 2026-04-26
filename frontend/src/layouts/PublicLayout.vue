@@ -1,27 +1,27 @@
 <template>
   <CustomCssInjector />
-  <ArchiveAtmosphere />
-  <CursorAura />
   <div class="shell">
     <header class="topbar">
       <nav class="nav-wrap">
-        <RouterLink to="/" class="flex items-center gap-3 font-medium tracking-tight">
+        <RouterLink to="/" class="brand-inline">
           <span class="brand-mark">星</span>
-          <span class="mono text-xs uppercase tracking-[0.26em] text-stone-600">Nexus / Archive</span>
+          <div>
+            <p class="mono text-[10px] uppercase tracking-[.26em] text-zinc-500">Nexus</p>
+            <p class="text-sm font-semibold tracking-[-0.03em]">Personal Gateway</p>
+          </div>
         </RouterLink>
-        <div class="nav-scroll">
-          <div class="flex min-w-max items-center gap-1 rounded-full border border-stone-950/10 bg-white/25 p-1">
-            <RouterLink class="nav-pill" to="/">首页</RouterLink>
-            <RouterLink class="nav-pill" to="/navigation">导航</RouterLink>
-            <RouterLink class="nav-pill" to="/projects">项目</RouterLink>
-            <RouterLink class="nav-pill" to="/profile">档案</RouterLink>
-            <RouterLink class="nav-pill" to="/about">关于</RouterLink>
-            <RouterLink class="nav-pill" to="/admin">后台</RouterLink>
+        <div class="nav-bar-shell nav-scroll">
+          <div class="nav-bar">
+            <RouterLink class="nav-tab" to="/">主页</RouterLink>
+            <RouterLink class="nav-tab" to="/navigation">导航</RouterLink>
+            <RouterLink class="nav-tab" to="/projects">项目</RouterLink>
+            <RouterLink class="nav-tab" to="/profile">档案</RouterLink>
+            <RouterLink class="nav-tab nav-tab-subtle" to="/admin">管理</RouterLink>
           </div>
         </div>
       </nav>
     </header>
-    <main class="mx-auto max-w-[1180px] px-5 py-8 md:py-12">
+    <main class="mx-auto max-w-[1240px] px-5 py-8 md:py-12">
       <RouterView v-slot="{ Component }">
         <Transition name="page" mode="out-in"><component :is="Component" /></Transition>
       </RouterView>
@@ -31,8 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import ArchiveAtmosphere from '../components/ArchiveAtmosphere.vue'
-import CursorAura from '../components/CursorAura.vue'
 import CustomCssInjector from '../components/CustomCssInjector.vue'
 import QuickDock from '../components/QuickDock.vue'
 </script>

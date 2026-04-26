@@ -351,3 +351,13 @@
 - Added sheen transitions on cards and controls.
 - Improved project media treatment and page transition feel.
 - Redeployed production frontend.
+
+### 2026-04-27 减法重构与导航优先
+
+- Reduced homepage back to personal-homepage + quick-navigation core.
+- Reworked top navigation bar into cleaner pill shell with less visual noise.
+- Simplified homepage structure: hero + quick links + now/social + selected projects.
+- Integrated built-in art asset directly into homepage hero and projects fallback.
+- Disabled bottom quick dock to reduce interface clutter.
+- Continued refining liquid glass surfaces toward cleaner premium look.
+- Redeployed production frontend.
