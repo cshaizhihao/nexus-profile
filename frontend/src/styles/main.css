@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light;
+  background: #f8fafc;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.nav-pill {
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  transition: all 240ms cubic-bezier(.2,.8,.2,1);
+}
+
+.nav-pill:hover,
+.nav-pill.router-link-active {
+  background: #fff;
+  color: #020617;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+}
+
+.admin-tab {
+  border-radius: 1rem;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  transition: all 220ms cubic-bezier(.2,.8,.2,1);
+}
+
+.admin-tab:hover,
+.admin-tab.active {
+  background: #0f172a;
+  color: white;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 220ms cubic-bezier(.2,.8,.2,1), transform 220ms cubic-bezier(.2,.8,.2,1);
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}

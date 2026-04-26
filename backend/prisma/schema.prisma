@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SiteConfig {
+  id              Int      @id @default(1)
+  title           String   @default("Nexus Profile")
+  subtitle        String   @default("星枢主页")
+  description     String   @default("A modern minimal personal homepage.")
+  avatarUrl       String?
+  backgroundType  String   @default("color")
+  backgroundValue String   @default("#f8fafc")
+  customCss       String   @default("")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model NavCategory {
+  id        Int           @id @default(autoincrement())
+  name      String
+  parentId  Int?
+  parent    NavCategory?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children  NavCategory[] @relation("CategoryTree")
+  sortOrder Int           @default(0)
+  links     NavLink[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model NavLink {
+  id          Int         @id @default(autoincrement())
+  categoryId  Int
+  category    NavCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  title       String
+  url         String
+  description String      @default("")
+  iconUrl     String?
+  iconType    String      @default("external")
+  sortOrder   Int         @default(0)
+  isVisible   Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Asset {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  path      String
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+}

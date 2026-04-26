@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: nexus-profile-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 10081
+      DATABASE_URL: file:/app/data/prod.db
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      - nexus_profile_data:/app/data
+      - ./uploads:/app/uploads
+    ports:
+      - "10081:10081"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: nexus-profile-frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_BASE_URL: http://127.0.0.1:10081
+    ports:
+      - "10080:80"
+    depends_on:
+      - backend
+
+volumes:
+  nexus_profile_data:
