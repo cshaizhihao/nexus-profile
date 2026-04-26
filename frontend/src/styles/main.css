@@ -132,3 +132,71 @@ body.dark-archive {
 .dark-archive .cursor-aura { mix-blend-mode:screen; background:radial-gradient(circle, rgba(215,135,69,.2), rgba(215,135,69,.08) 38%, transparent 68%); }
 @media (pointer: coarse) { .cursor-aura { display:none; } }
 @media (max-width: 760px) { .orb { width:75vw; height:75vw; } .kinetic-title { font-size:clamp(4rem,22vw,7rem); } }
+
+
+/* Motion System v2 — quiet, purposeful, accessible */
+:root {
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --motion-fast: 160ms;
+  --motion-base: 260ms;
+  --motion-slow: 620ms;
+}
+
+/* Reduce previous noisy atmosphere */
+.scanline { display: none; }
+.constellation span { opacity: .18; width: 2px; height: 2px; animation-duration: 6.8s; }
+.orb { opacity: .16; filter: blur(58px); animation-duration: 34s; }
+.cursor-aura { width: 220px; height: 220px; left: -110px; top: -110px; opacity: .55; background: radial-gradient(circle, rgba(155,72,25,.10), rgba(155,72,25,.035) 40%, transparent 70%); }
+
+/* More refined surfaces */
+.archive-card,
+.bento-card,
+.admin-shell-card,
+.admin-side {
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-card::after,
+.bento-card::after,
+.admin-shell-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.20), transparent 32%, rgba(17,16,14,.035));
+  opacity: .7;
+}
+
+.depth-card { transition: transform var(--motion-base) var(--ease-out-expo), box-shadow var(--motion-base) var(--ease-out-expo), border-color var(--motion-base) ease; }
+.depth-card:hover { transform: translateY(-4px); }
+.depth-card::before { opacity: .34; transition: transform 900ms var(--ease-out-expo); }
+
+.nav-pill,
+.primary-btn,
+.ghost-btn,
+.danger-btn,
+.dock-item { transition-duration: var(--motion-fast); transition-timing-function: var(--ease-out-quart); }
+
+.kinetic-title span { animation-duration: 760ms; animation-timing-function: var(--ease-out-expo); }
+.hero-reveal { animation-duration: 680ms; animation-timing-function: var(--ease-out-expo); }
+.hero-reveal-delay { animation-duration: 760ms; animation-timing-function: var(--ease-out-expo); }
+.float-slow { animation: floatSlow 10s ease-in-out infinite alternate; }
+
+.quick-dock { bottom: 1.15rem; background: rgba(238,232,220,.68); box-shadow: 0 18px 55px rgba(17,16,14,.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .cursor-aura,
+  .atmosphere,
+  .quick-dock { display: none !important; }
+}
+.magnetic-wrap { transition: transform var(--motion-base) var(--ease-out-expo); }

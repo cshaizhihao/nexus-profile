@@ -26,27 +26,27 @@
     </div>
 
     <div class="reveal-stack grid gap-4 md:grid-cols-6">
-      <RouterLink to="/navigation" class="bento-card depth-card link-orb block md:col-span-3 md:row-span-2" style="--d:1">
+      <MagneticCard class="md:col-span-3 md:row-span-2" style="--d:1"><RouterLink to="/navigation" class="bento-card depth-card link-orb block h-full">
         <p class="kicker">Gateway</p>
         <h2 class="relative z-10 mt-8 max-w-lg text-5xl leading-none tracking-[-0.06em]">常用入口，不再散落在浏览器角落。</h2>
         <p class="relative z-10 mt-6 max-w-md leading-8 text-stone-600">按分类收纳真实会用到的链接，并持续检测它们是否还活着。</p>
-      </RouterLink>
+      </RouterLink></MagneticCard>
 
-      <RouterLink to="/projects" class="bento-card depth-card link-orb block md:col-span-3" style="--d:2">
+      <MagneticCard class="md:col-span-3" style="--d:2"><RouterLink to="/projects" class="bento-card depth-card link-orb block h-full">
         <p class="kicker">Works</p>
         <h2 class="relative z-10 mt-5 text-4xl tracking-[-0.05em]">作品、项目、长期资产。</h2>
-      </RouterLink>
+      </RouterLink></MagneticCard>
 
-      <RouterLink to="/profile" class="bento-card depth-card block md:col-span-2" style="--d:3">
+      <MagneticCard class="md:col-span-2" style="--d:3"><RouterLink to="/profile" class="bento-card depth-card block h-full">
         <p class="kicker">Dossier</p>
         <h2 class="mt-5 text-3xl tracking-[-0.05em]">档案</h2>
         <p class="mt-3 text-stone-500">身份标签与当前状态。</p>
-      </RouterLink>
+      </RouterLink></MagneticCard>
 
-      <article class="bento-card depth-card md:col-span-1" style="--d:4">
+      <MagneticCard class="md:col-span-1" style="--d:4"><article class="bento-card depth-card h-full">
         <p class="kicker">Theme</p>
         <p class="mt-5 text-3xl tracking-[-0.05em]">Archive</p>
-      </article>
+      </article></MagneticCard>
     </div>
 
     <section class="reveal-stack grid gap-4 md:grid-cols-3">
@@ -76,6 +76,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import HomeMarquee from '../components/HomeMarquee.vue'
+import MagneticCard from '../components/MagneticCard.vue'
 import KineticTitle from '../components/KineticTitle.vue'
 import { useSiteStore } from '../stores/site'
 

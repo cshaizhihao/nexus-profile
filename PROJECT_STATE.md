@@ -247,3 +247,14 @@
 - Added stacked reveal animations and slow floating hero card.
 - Applied depth-card interactions across homepage and key subpages.
 - Redeployed production frontend.
+
+### 2026-04-27 动效审美修复
+
+- Added MOTION_AUDIT.md.
+- Introduced Motion System v2 tokens.
+- Disabled noisy scanline effect.
+- Reduced global orb/cursor visual intensity.
+- Added prefers-reduced-motion support.
+- Added lightweight MagneticCard interaction.
+- Applied magnetic interaction to homepage main route cards.
+- Redeployed production frontend.
