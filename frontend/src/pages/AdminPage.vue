@@ -54,6 +54,7 @@
         </div>
 
         <div v-else class="grid gap-6">
+          <div class="flex flex-wrap gap-3"><button class="primary-btn" @click="checkAllLinks">检测全部链接</button><RouterLink to="/navigation" class="ghost-btn">预览导航页</RouterLink></div>
           <form class="grid gap-4 md:grid-cols-2" @submit.prevent="saveLink">
             <label class="field"><span>所属分类</span><select v-model.number="linkForm.categoryId"><option v-for="category in store.categories" :key="category.id" :value="category.id">{{ category.name }}</option></select></label>
             <label class="field"><span>标题</span><input v-model="linkForm.title" placeholder="GitHub" /></label>
@@ -66,7 +67,7 @@
             <button class="primary-btn md:col-span-2">{{ editingLinkId ? '保存链接' : '新增链接' }}</button>
             <button v-if="editingLinkId" type="button" class="ghost-btn md:col-span-2" @click="resetLinkForm">取消编辑</button>
           </form>
-          <div class="grid gap-3"><article v-for="link in store.links" :key="link.id" class="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white/70 p-4"><div class="flex items-center gap-3"><img v-if="link.iconUrl" :src="link.iconUrl" class="h-10 w-10 rounded-xl object-cover" /><div><h3 class="font-semibold">{{ link.title }}</h3><p class="break-all text-sm text-slate-400">{{ link.url }}</p></div></div><div class="flex gap-2"><button class="ghost-btn" @click="editLink(link)">编辑</button><button class="danger-btn" @click="removeLink(link.id)">删除</button></div></article></div>
+          <div class="grid gap-3"><article v-for="link in store.links" :key="link.id" class="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white/70 p-4"><div class="flex items-center gap-3"><img v-if="link.iconUrl" :src="link.iconUrl" class="h-10 w-10 rounded-xl object-cover" /><div><h3 class="font-semibold">{{ link.title }}</h3><p class="break-all text-sm text-slate-400">{{ link.url }}</p><p class="mt-1 text-xs text-slate-400">状态：<span :class="healthClass(link.healthStatus)">{{ healthLabel(link.healthStatus) }}</span><span v-if="link.healthCode"> · {{ link.healthCode }}</span></p></div></div><div class="flex gap-2"><button class="ghost-btn" @click="checkLink(link.id)">检测</button><button class="ghost-btn" @click="editLink(link)">编辑</button><button class="danger-btn" @click="removeLink(link.id)">删除</button></div></article></div>
         </div>
       </template>
     </div>
@@ -114,6 +115,10 @@ async function removeCategory(id: number) { await api.deleteCategory(id); await 
 function editLink(link: NavLink) { editingLinkId.value = link.id; Object.assign(linkForm, { categoryId: link.categoryId, title: link.title, url: link.url, description: link.description, iconUrl: link.iconUrl || '', iconType: link.iconType, sortOrder: link.sortOrder, isVisible: link.isVisible }) }
 function resetLinkForm() { editingLinkId.value = null; Object.assign(linkForm, { categoryId: store.categories[0]?.id || 0, title: '', url: '', description: '', iconUrl: '', iconType: 'external', sortOrder: 0, isVisible: true }) }
 async function saveLink() { editingLinkId.value ? await api.updateLink(editingLinkId.value, { ...linkForm }) : await api.createLink({ ...linkForm }); resetLinkForm(); await loadAll(); flash('导航链接已保存') }
+async function checkLink(id: number) { await api.checkLink(id); await loadAll(); flash('链接检测完成') }
+async function checkAllLinks() { await api.checkAllLinks(); await loadAll(); flash('全部链接检测完成') }
+function healthLabel(status: string) { return { ok: '正常', broken: '失效', timeout: '超时', unknown: '未检测' }[status] || status }
+function healthClass(status: string) { return status === 'ok' ? 'text-emerald-600' : status === 'unknown' ? 'text-slate-400' : 'text-rose-600' }
 async function removeLink(id: number) { await api.deleteLink(id); await loadAll(); flash('导航链接已删除') }
 onMounted(loadAll)
 </script>

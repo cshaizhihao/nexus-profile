@@ -11,6 +11,24 @@ type LinkBody = {
   iconType?: string
   sortOrder?: number
   isVisible?: boolean
+  healthStatus?: string
+  healthCode?: number | null
+}
+
+async function checkUrl(url: string) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 6000)
+  try {
+    const started = Date.now()
+    const response = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: controller.signal })
+    const durationMs = Date.now() - started
+    const status = response.status >= 200 && response.status < 400 ? 'ok' : response.status >= 400 ? 'broken' : 'unknown'
+    return { status, code: response.status, durationMs }
+  } catch {
+    return { status: 'timeout', code: null, durationMs: 6000 }
+  } finally {
+    clearTimeout(timeout)
+  }
 }
 
 export async function navRoutes(app: FastifyInstance) {
@@ -89,6 +107,30 @@ export async function navRoutes(app: FastifyInstance) {
         ...(body.isVisible !== undefined ? { isVisible: body.isVisible } : {}),
       },
     })
+  })
+
+  app.post('/links/:id/check', { preHandler: app.verifyAdmin }, async (request) => {
+    const { id } = request.params as { id: string }
+    const link = await prisma.navLink.findUniqueOrThrow({ where: { id: Number(id) } })
+    const result = await checkUrl(link.url)
+    return prisma.navLink.update({
+      where: { id: link.id },
+      data: { healthStatus: result.status, healthCode: result.code, healthCheckedAt: new Date() },
+    })
+  })
+
+  app.post('/links/check-all', { preHandler: app.verifyAdmin }, async () => {
+    const links = await prisma.navLink.findMany({ orderBy: { id: 'asc' } })
+    const results = []
+    for (const link of links) {
+      const result = await checkUrl(link.url)
+      const updated = await prisma.navLink.update({
+        where: { id: link.id },
+        data: { healthStatus: result.status, healthCode: result.code, healthCheckedAt: new Date() },
+      })
+      results.push(updated)
+    }
+    return results
   })
 
   app.delete('/links/:id', { preHandler: app.verifyAdmin }, async (request) => {

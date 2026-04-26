@@ -94,3 +94,7 @@ ADMIN_TOKEN="replace-with-random-token"
 ```
 
 All CMS write APIs and image uploads require `Authorization: Bearer <ADMIN_TOKEN>`. The login API exchanges the admin password for that token.
+
+## Link Health Check
+
+The CMS can check one link or all links and stores health status, HTTP code and check time. Write operations require admin login.

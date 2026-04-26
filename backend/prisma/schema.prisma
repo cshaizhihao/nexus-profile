@@ -43,6 +43,9 @@ model NavLink {
   iconType    String      @default("external")
   sortOrder   Int         @default(0)
   isVisible   Boolean     @default(true)
+  healthStatus String     @default("unknown")
+  healthCode   Int?
+  healthCheckedAt DateTime?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }

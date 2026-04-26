@@ -168,3 +168,12 @@
 - Added four theme presets in CMS: 极简浅色、深空暗色、暖纸质感、Mono Dark.
 - Generated production admin password in local `.env` only; not committed.
 - Redeployed production static frontend and restarted built backend.
+
+### 2026-04-26 链接健康检测与首页升级
+
+- Added health fields to `NavLink`: status, HTTP code and checked time.
+- Added protected health check APIs for single link and all links.
+- Added CMS buttons to check one link or all links.
+- Added health status display in the admin link list.
+- Added homepage Bento showcase component.
+- Redeployed production frontend and restarted backend.

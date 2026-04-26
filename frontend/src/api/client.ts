@@ -44,6 +44,9 @@ export type NavLink = {
   iconType: string
   sortOrder: number
   isVisible: boolean
+  healthStatus: string
+  healthCode?: number | null
+  healthCheckedAt?: string | null
   category?: NavCategory
 }
 
@@ -81,6 +84,8 @@ export const api = {
     request<NavLink>('/api/nav/links', { method: 'POST', body: JSON.stringify(payload) }, true),
   updateLink: (id: number, payload: Partial<NavLink>) =>
     request<NavLink>(`/api/nav/links/${id}`, { method: 'PUT', body: JSON.stringify(payload) }, true),
+  checkLink: (id: number) => request<NavLink>(`/api/nav/links/${id}/check`, { method: 'POST' }, true),
+  checkAllLinks: () => request<NavLink[]>('/api/nav/links/check-all', { method: 'POST' }, true),
   deleteLink: (id: number) => request<{ ok: true }>(`/api/nav/links/${id}`, { method: 'DELETE' }, true),
   uploadIcon: async (file: File) => {
     const form = new FormData()

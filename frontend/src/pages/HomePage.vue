@@ -18,11 +18,15 @@
         <p class="mt-2 leading-7 text-slate-600">{{ item.desc }}</p>
       </article>
     </div>
+    <div class="lg:col-span-2">
+      <BentoShowcase :link-count="store.visibleLinks.length" />
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
+import BentoShowcase from '../components/BentoShowcase.vue'
 import { useSiteStore } from '../stores/site'
 
 const store = useSiteStore()
