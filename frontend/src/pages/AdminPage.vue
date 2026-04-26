@@ -141,19 +141,24 @@
 
           <section class="archive-card p-5">
             <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Live preview</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">首页预览</h3></div></div>
+            <div class="mb-4 grid gap-3 md:grid-cols-3">
+              <label class="flex items-center gap-2 text-sm text-stone-600"><input v-model="homepageLayout.showNow" type="checkbox" /> 显示 Now</label>
+              <label class="flex items-center gap-2 text-sm text-stone-600"><input v-model="homepageLayout.showSocial" type="checkbox" /> 显示 Social</label>
+              <label class="flex items-center gap-2 text-sm text-stone-600"><input v-model="homepageLayout.showProjects" type="checkbox" /> 显示 Projects</label>
+            </div>
             <div class="grid gap-4 lg:grid-cols-[1.15fr_.85fr]">
               <div class="rounded-[1.75rem] border border-stone-950/10 bg-white/20 p-5">
                 <p class="kicker">Hero</p>
                 <h4 class="mt-4 text-4xl tracking-[-0.05em]">{{ siteForm.title || "Zaki Archive" }}</h4>
                 <p class="mt-3 text-stone-600">{{ profileForm.bio || "个人数字档案主页" }}</p>
-                <div class="mt-5 grid gap-3 md:grid-cols-3">
-                  <div v-for="(item, index) in nowBlocks.filter(i => i.enabled !== false).slice(0,3)" :key="index" class="rounded-2xl border border-stone-950/10 p-3" :class="item.variant === "feature" ? "bg-stone-950 text-white" : item.variant === "soft" ? "bg-amber-50/60" : "bg-white/20"">
+                <div v-if="homepageLayout.showNow" class="mt-5 grid gap-3 md:grid-cols-3">
+                  <div v-for="(item, index) in nowBlocks.filter(i => i.enabled !== false).slice(0,3)" :key="index" class="rounded-2xl border border-stone-950/10 p-3" :class="item.variant === 'feature' ? 'bg-stone-950 text-white' : item.variant === 'soft' ? 'bg-amber-50/60' : 'bg-white/20'">
                     <p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ item.kicker }}</p>
                     <p class="mt-2 text-lg tracking-[-0.03em]">{{ item.title }}</p>
                   </div>
                 </div>
               </div>
-              <div class="rounded-[1.75rem] border border-stone-950/10 bg-white/20 p-5">
+              <div v-if="homepageLayout.showSocial" class="rounded-[1.75rem] border border-stone-950/10 bg-white/20 p-5">
                 <p class="kicker">Social</p>
                 <div class="mt-4 grid gap-3">
                   <div v-for="(item, index) in socialItems.filter(i => i.enabled !== false).slice(0,4)" :key="index" class="rounded-2xl border border-stone-950/10 bg-white/20 p-3">
@@ -161,6 +166,15 @@
                     <p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ item.type }}</p>
                     <p class="mt-2 text-lg tracking-[-0.03em]">{{ item.label }}</p>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="homepageLayout.showProjects" class="mt-4 rounded-[1.75rem] border border-stone-950/10 bg-white/20 p-5">
+              <p class="kicker">Projects</p>
+              <div class="mt-3 grid gap-3 md:grid-cols-3">
+                <div v-for="project in store.projects.slice(0,3)" :key="project.id" class="rounded-2xl border border-stone-950/10 bg-white/20 p-3">
+                  <p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ project.type }}</p>
+                  <p class="mt-2 text-lg tracking-[-0.03em]">{{ project.title }}</p>
                 </div>
               </div>
             </div>
@@ -232,8 +246,10 @@ const profileForm = reactive({
   techStack: '',
   socialLinks: '[{"type":"Code","label":"GitHub","href":"https://github.com/cshaizhihao"}]',
   nowItems: '[{"kicker":"Focus","title":"整理入口","desc":"把真正高频使用的服务放到清晰位置。"}]',
+  homepageLayout: '{"showNow":true,"showSocial":true,"showProjects":true}',
 })
 const projectForm = reactive({ title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true })
+const homepageLayout = reactive({ showNow: true, showSocial: true, showProjects: true })
 
 watch(() => store.siteConfig, (config) => { if (config) Object.assign(siteForm, { title: config.title, subtitle: config.subtitle, description: config.description, avatarUrl: config.avatarUrl || '', backgroundType: config.backgroundType, backgroundValue: config.backgroundValue, customCss: config.customCss }) }, { immediate: true })
 watch(() => store.profile, (profile) => {
@@ -241,6 +257,7 @@ watch(() => store.profile, (profile) => {
     Object.assign(profileForm, profile)
     try { socialItems.value = JSON.parse(profile.socialLinks || '[]').map((item: any) => ({ enabled: true, ...item })) } catch { socialItems.value = [] }
     try { nowBlocks.value = JSON.parse(profile.nowItems || '[]').map((item: any) => ({ enabled: true, ...item })) } catch { nowBlocks.value = [] }
+    try { Object.assign(homepageLayout, JSON.parse(profile.homepageLayout || '{}')) } catch {}
   }
 }, { immediate: true })
 watch(() => store.categories, (categories) => { if (!linkForm.categoryId && categories[0]) linkForm.categoryId = categories[0].id }, { immediate: true })
@@ -268,6 +285,7 @@ async function removeLink(id: number) { await api.deleteLink(id); await loadAll(
 async function saveProfile() {
   profileForm.socialLinks = JSON.stringify(socialItems.value, null, 2)
   profileForm.nowItems = JSON.stringify(nowBlocks.value, null, 2)
+  profileForm.homepageLayout = JSON.stringify(homepageLayout)
   await contentApi.updateProfile(profileForm)
   await loadAll()
   flash('个人档案已保存')

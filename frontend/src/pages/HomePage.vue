@@ -49,10 +49,10 @@
       </article></MagneticCard>
     </div>
 
-    <NowPanel :items="nowItems" />
-    <SocialRail :links="socialLinks" />
+    <NowPanel v-if="homepageLayout.showNow !== false" :items="nowItems" />
+    <SocialRail v-if="homepageLayout.showSocial !== false" :links="socialLinks" />
 
-    <section v-if="featuredProjects.length" class="archive-card depth-card p-7 md:p-8">
+    <section v-if="homepageLayout.showProjects !== false && featuredProjects.length" class="archive-card depth-card p-7 md:p-8">
       <div class="mb-6 flex items-end justify-between gap-4">
         <div><p class="kicker">Selected works</p><h2 class="mt-2 text-3xl tracking-[-0.04em]">最近想展示的东西</h2></div>
         <RouterLink to="/projects" class="mono text-xs uppercase tracking-[.2em] text-stone-500">View all</RouterLink>
@@ -87,6 +87,9 @@ const socialLinks = computed(() => {
 })
 const nowItems = computed(() => {
   try { return JSON.parse(store.profile?.nowItems || '[]') } catch { return [] }
+})
+const homepageLayout = computed(() => {
+  try { return JSON.parse(store.profile?.homepageLayout || '{}') } catch { return {} }
 })
 onMounted(() => { if (!store.siteConfig) store.loadAll() })
 </script>

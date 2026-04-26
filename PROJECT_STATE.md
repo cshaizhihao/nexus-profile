@@ -298,3 +298,11 @@
 - Added Now card variant selection: default / feature / soft.
 - Upgraded preview panel to reflect icon and variant differences.
 - Redeployed production frontend.
+
+### 2026-04-27 三轮第三阶段
+
+- Added homepageLayout field to profile config flow.
+- Added homepage module visibility toggles: showNow / showSocial / showProjects.
+- Homepage now conditionally renders major modules from backend-configurable layout.
+- Admin preview upgraded to reflect Hero + Now + Social + Projects block visibility.
+- Redeployed production frontend.
