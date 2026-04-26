@@ -51,6 +51,8 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
+The frontend container serves the built SPA and proxies `/api/` plus `/uploads/` to the backend container.
+
 ## VPS One-command Install
 
 ```bash
@@ -68,3 +70,13 @@ See [PROJECT_STATE.md](./PROJECT_STATE.md) for progress, completed tasks, todo l
 - Create, edit and delete navigation links.
 - Upload local images for avatars and link icons.
 - Use external image URLs when preferred.
+
+## Current VPS Production Notes
+
+The live preview currently uses the existing server-level Docker Nginx default entry. Static frontend files are served from `/home/web/html/nexus-profile`, while `/api/` and `/uploads/` proxy to the Node backend on `127.0.0.1:10081`.
+
+Production deploy helper:
+
+```bash
+bash scripts/deploy-production.sh
+```

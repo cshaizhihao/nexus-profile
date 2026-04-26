@@ -109,6 +109,8 @@
 - Target backend API: `http://127.0.0.1:10081`
 - Public no-port preview through existing Nginx default server: `http://208.115.216.131/`
 - Public API through existing Nginx default server: `http://208.115.216.131/api/site-config`
+- Production static root: `/home/web/html/nexus-profile`
+- Production backend: built Node process on `127.0.0.1:10081`
 - Avoid single-page long-scroll design; route/module separation is mandatory.
 
 ## Update Log
@@ -146,3 +148,13 @@
 - Added edit mode for navigation categories and links.
 - Enabled frontend custom CSS injection from site config.
 - Verified backend and frontend production builds.
+
+### 2026-04-26 Production收敛
+
+- Frontend is now served as static production build via existing Docker Nginx.
+- Stopped Vite dev server; public page no longer depends on port `10080`.
+- Backend now runs from built `dist/main.js` on `10081`.
+- Existing Docker Nginx default direct-IP server now serves `/home/web/html/nexus-profile`.
+- `/api/` and `/uploads/` are proxied to backend `127.0.0.1:10081`.
+- Added `scripts/deploy-production.sh` and `scripts/nginx-direct-ip.conf`.
+- Updated Docker frontend Nginx config to proxy `/api/` and `/uploads/` to compose backend service.

@@ -10,3 +10,6 @@ backend/prisma/dev.db
 backend/prisma/dev.db-journal
 
 *.tsbuildinfo
+
+backend/.nexus-profile-backend.pid
+backend/.nexus-profile-backend.log
