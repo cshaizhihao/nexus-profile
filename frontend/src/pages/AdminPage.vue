@@ -205,8 +205,8 @@ const editingCategoryId = ref<number | null>(null)
 const editingLinkId = ref<number | null>(null)
 const editingProjectId = ref<number | null>(null)
 const exportText = ref('')
-const socialItems = ref<Array<{ type: string; label: string; href: string }>>([])
-const nowBlocks = ref<Array<{ kicker: string; title: string; desc: string }>>([])
+const socialItems = ref<Array<{ type: string; label: string; href: string; enabled?: boolean }>>([])
+const nowBlocks = ref<Array<{ kicker: string; title: string; desc: string; enabled?: boolean }>>([])
 const tabs = [{ key: 'overview', label: '概览' }, { key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }, { key: 'profile', label: '个人档案' }, { key: 'projects', label: '项目作品' }, { key: 'data', label: '数据导出' }] as const
 const themes = [
   { name: '极简浅色', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' },
