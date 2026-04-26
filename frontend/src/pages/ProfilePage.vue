@@ -1,14 +1,14 @@
 <template>
-  <section class="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-    <div class="rounded-[2rem] border border-white/80 bg-white/75 p-10 shadow-sm backdrop-blur-xl">
-      <p class="text-sm text-slate-400">Profile</p>
-      <h1 class="mt-2 text-4xl font-semibold tracking-[-0.03em]">{{ profile?.headline || '个人档案' }}</h1>
-      <p class="mt-5 leading-8 text-slate-600">{{ profile?.bio }}</p>
+  <section class="grid gap-7 lg:grid-cols-[.95fr_1.05fr]">
+    <div class="archive-card p-8 md:p-10">
+      <p class="kicker">Profile dossier</p>
+      <h1 class="mt-5 text-6xl leading-none tracking-[-0.07em] md:text-8xl">{{ profile?.headline || '个人档案' }}</h1>
+      <p class="mt-8 text-xl leading-9 text-stone-600">{{ profile?.bio }}</p>
     </div>
     <div class="grid gap-4">
-      <article class="bento-card"><h2 class="text-xl font-semibold">身份标签</h2><p class="mt-3 text-slate-500">{{ tags.join(' · ') }}</p></article>
-      <article class="bento-card"><h2 class="text-xl font-semibold">当前状态</h2><p class="mt-3 text-slate-500">{{ profile?.status }}</p></article>
-      <article class="bento-card"><h2 class="text-xl font-semibold">技术栈</h2><p class="mt-3 text-slate-500">{{ techStack.join(' · ') }}</p></article>
+      <article class="bento-card"><p class="kicker">Identity tags</p><p class="mt-5 text-3xl tracking-[-0.04em]">{{ tags.join(' · ') }}</p></article>
+      <article class="bento-card"><p class="kicker">Current state</p><p class="mt-5 text-3xl tracking-[-0.04em]">{{ profile?.status }}</p></article>
+      <article class="bento-card"><p class="kicker">Stack</p><p class="mt-5 text-3xl tracking-[-0.04em]">{{ techStack.join(' · ') }}</p></article>
     </div>
   </section>
 </template>

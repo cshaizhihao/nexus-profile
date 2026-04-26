@@ -203,3 +203,12 @@
 - Profile page now reads profile data from backend.
 - Admin now includes Profile, Projects and Data Export tabs.
 - Redeployed production frontend and restarted backend.
+
+### 2026-04-26 前台视觉重构
+
+- Rebuilt frontend aesthetic direction as a personal digital archive instead of project documentation.
+- Replaced generic SaaS look with editorial archive style: paper texture, serif display type, muted ink palette and refined cards.
+- Reworked homepage into real personal homepage: identity, now status, routes, selected works and counters.
+- Reworked navigation, projects and profile pages with coherent visual language.
+- Improved mobile navigation with horizontal scroll.
+- Redeployed production frontend.
