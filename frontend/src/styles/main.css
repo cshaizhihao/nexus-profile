@@ -99,3 +99,18 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 14px 35px rgb(15 23 42 / 0.12);
 }
+
+.ghost-btn {
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #334155;
+  padding: 0.85rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms cubic-bezier(.2,.8,.2,1);
+}
+
+.ghost-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 35px rgb(15 23 42 / 0.1);
+}

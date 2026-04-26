@@ -1,4 +1,5 @@
 <template>
+  <CustomCssInjector />
   <div class="min-h-screen bg-[radial-gradient(circle_at_top_left,#eef2ff,transparent_32%),linear-gradient(135deg,#f8fafc,#eef2f7)] text-slate-950">
     <header class="sticky top-0 z-20 border-b border-white/70 bg-white/70 backdrop-blur-xl">
       <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -24,3 +25,7 @@
     </main>
   </div>
 </template>
+
+<script setup lang="ts">
+import CustomCssInjector from '../components/CustomCssInjector.vue'
+</script>

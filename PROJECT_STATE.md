@@ -68,7 +68,10 @@
 - [x] Wired homepage and navigation page to backend API
 - [x] Added frontend API client and Pinia site store
 - [x] Validated backend/frontend builds after CMS wiring
-- [ ] Add asset upload endpoint
+- [x] Added asset upload endpoint and static uploads serving
+- [x] Added avatar/icon upload controls in CMS
+- [x] Added category/link edit mode in CMS
+- [x] Enabled custom CSS injection on frontend
 
 ## Todo
 
@@ -85,7 +88,7 @@
 - [x] Implement site config CRUD
 - [x] Implement navigation category CRUD
 - [x] Implement navigation link CRUD
-- [ ] Implement icon upload endpoint
+- [x] Implement icon upload endpoint
 - [x] Add custom CSS persistence field and API path
 
 ### Deployment
@@ -134,3 +137,12 @@
   - Existing Docker Nginx default server was returning `444` for direct IP access.
   - Reconfigured `/home/web/conf.d/default.conf` to proxy direct IP access to frontend `10080` and `/api/` to backend `10081`.
   - Changed frontend API base to relative path and added Vite `/api` proxy for dev mode.
+
+### 2026-04-26 Phase 3
+
+- Added local image upload endpoint: `POST /api/uploads/icon`.
+- Added static upload serving from `/uploads/`.
+- Added CMS upload controls for avatar and link icons.
+- Added edit mode for navigation categories and links.
+- Enabled frontend custom CSS injection from site config.
+- Verified backend and frontend production builds.

@@ -12,8 +12,8 @@ Repository: <https://github.com/cshaizhihao/nexus-profile>
 - Vue Router based multi-page structure, no one-page waterfall layout
 - Fastify + Prisma backend API
 - CMS-ready site configuration, navigation categories, links and asset upload model
-- Custom CSS injection support planned
-- Local icon upload and external icon URL support planned
+- Custom CSS injection support
+- Local icon upload and external icon URL support
 - Docker Compose deployment
 - VPS one-command install script
 
@@ -60,3 +60,11 @@ bash install.sh
 ## Project State
 
 See [PROJECT_STATE.md](./PROJECT_STATE.md) for progress, completed tasks, todo list and environment notes.
+
+## CMS Capabilities
+
+- Edit homepage title, subtitle, description, avatar, background and custom CSS.
+- Create, edit and delete navigation categories.
+- Create, edit and delete navigation links.
+- Upload local images for avatars and link icons.
+- Use external image URLs when preferred.

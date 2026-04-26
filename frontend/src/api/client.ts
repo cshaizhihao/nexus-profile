@@ -18,6 +18,15 @@ export type NavCategory = {
   sortOrder: number
 }
 
+
+export type Asset = {
+  id: number
+  filename: string
+  path: string
+  mimeType: string
+  size: number
+}
+
 export type NavLink = {
   id: number
   categoryId: number
@@ -56,4 +65,11 @@ export const api = {
   updateLink: (id: number, payload: Partial<NavLink>) =>
     request<NavLink>(`/api/nav/links/${id}`, { method: 'PUT', body: JSON.stringify(payload) }),
   deleteLink: (id: number) => request<{ ok: true }>(`/api/nav/links/${id}`, { method: 'DELETE' }),
+  uploadIcon: async (file: File) => {
+    const form = new FormData()
+    form.append('file', file)
+    const response = await fetch(`${API_BASE_URL}/api/uploads/icon`, { method: 'POST', body: form })
+    if (!response.ok) throw new Error(await response.text())
+    return response.json() as Promise<Asset>
+  },
 }
