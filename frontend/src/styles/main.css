@@ -93,3 +93,15 @@ body.dark-archive {
   --line: rgba(244,239,230,0.14);
   --accent: #d78745;
 }
+
+.admin-shell-card { border:1px solid var(--line); background:var(--card); backdrop-filter:blur(24px); box-shadow:0 34px 100px rgba(65,47,25,.12); }
+.admin-side { border:1px solid var(--line); background:rgba(255,252,244,.58); backdrop-filter:blur(24px); }
+.dark-archive .admin-side { background:rgba(32,29,25,.72); }
+.dark-archive .topbar { background:rgba(17,16,14,.78); }
+.dark-archive .nav-pill { color:rgba(244,239,230,.68); }
+.dark-archive .nav-pill:hover,.dark-archive .nav-pill.router-link-active { background:#f4efe6; color:#11100e; }
+.dark-archive .field input,.dark-archive .field textarea,.dark-archive .field select { background:rgba(32,29,25,.72); color:var(--ink); border-color:var(--line); }
+.dark-archive .ghost-btn { background:rgba(32,29,25,.72); color:var(--ink); }
+.dark-archive .bento-card,.dark-archive .archive-card { box-shadow:0 34px 100px rgba(0,0,0,.24); }
+.dark-archive .text-stone-950,.dark-archive .text-stone-800 { color:var(--ink); }
+.dark-archive .text-stone-600,.dark-archive .text-stone-500 { color:var(--muted); }

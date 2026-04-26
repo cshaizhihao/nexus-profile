@@ -229,3 +229,11 @@
 - Reworked profile page with dossier layout, tag chips and stack grid.
 - Added dark archive CSS variable baseline for future theme compatibility.
 - Redeployed production frontend.
+
+### 2026-04-26 主题与后台视觉统一
+
+- Connected dark theme detection to frontend CSS variable baseline.
+- Added dark archive compatibility for topbar, cards, fields and buttons.
+- Reworked admin shell visual style to match the personal archive frontend.
+- Replaced generic admin white cards with archive-style surfaces.
+- Redeployed production frontend.

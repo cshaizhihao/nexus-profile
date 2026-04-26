@@ -13,6 +13,10 @@ watch(
   () => store.siteConfig?.customCss,
   (css) => {
     style.textContent = css || ''
+    const value = store.siteConfig?.backgroundValue || ''
+    const isDark = value.includes('#0') || value.includes('#111') || value.includes('#020617') || (css || '').includes('color-scheme: dark')
+    document.documentElement.classList.toggle('dark-archive', isDark)
+    document.body.classList.toggle('dark-archive', isDark)
   },
   { immediate: true },
 )
