@@ -291,3 +291,10 @@
 - Upgraded live preview from simple text blocks to a homepage-like split preview panel.
 - Preserved backend JSON compatibility while moving editing to structured UI.
 - Redeployed production frontend.
+
+### 2026-04-27 三轮第二阶段
+
+- Added social iconUrl support with upload in visual editor.
+- Added Now card variant selection: default / feature / soft.
+- Upgraded preview panel to reflect icon and variant differences.
+- Redeployed production frontend.

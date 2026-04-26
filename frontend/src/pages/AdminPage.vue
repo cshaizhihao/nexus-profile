@@ -101,10 +101,14 @@
           <section class="archive-card p-5">
             <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Social links</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">社交入口</h3></div><button type="button" class="ghost-btn" @click="addSocial">新增</button></div>
             <div class="grid gap-3">
-              <div v-for="(item, index) in socialItems" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4 md:grid-cols-[110px_1fr_1fr_auto]">
+              <div v-for="(item, index) in socialItems" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4 md:grid-cols-[110px_1fr_1fr_1fr_auto]">
                 <input v-model="item.type" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="类型" />
                 <input v-model="item.label" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="名称" />
                 <input v-model="item.href" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="链接" />
+                <div class="grid gap-2">
+                  <input v-model="item.iconUrl" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="图标 URL" />
+                  <input type="file" accept="image/*" @change="uploadSocialIcon($event, index)" />
+                </div>
                 <div class="flex flex-wrap gap-2">
                   <label class="flex items-center gap-2 text-xs text-stone-500"><input v-model="item.enabled" type="checkbox" />显示</label>
                   <button type="button" class="ghost-btn" @click="moveSocial(index, -1)">上移</button>
@@ -119,9 +123,10 @@
             <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Now board</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">当前关注</h3></div><button type="button" class="ghost-btn" @click="addNow">新增</button></div>
             <div class="grid gap-3">
               <div v-for="(item, index) in nowBlocks" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4">
-                <div class="grid gap-3 md:grid-cols-2">
+                <div class="grid gap-3 md:grid-cols-3">
                   <input v-model="item.kicker" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="Kicker" />
                   <input v-model="item.title" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="标题" />
+                  <select v-model="item.variant" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2"><option value="default">普通</option><option value="feature">强调</option><option value="soft">柔和</option></select>
                 </div>
                 <textarea v-model="item.desc" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" rows="3" placeholder="描述" />
                 <div class="flex flex-wrap gap-2">
@@ -142,7 +147,7 @@
                 <h4 class="mt-4 text-4xl tracking-[-0.05em]">{{ siteForm.title || "Zaki Archive" }}</h4>
                 <p class="mt-3 text-stone-600">{{ profileForm.bio || "个人数字档案主页" }}</p>
                 <div class="mt-5 grid gap-3 md:grid-cols-3">
-                  <div v-for="(item, index) in nowBlocks.filter(i => i.enabled !== false).slice(0,3)" :key="index" class="rounded-2xl border border-stone-950/10 bg-white/20 p-3">
+                  <div v-for="(item, index) in nowBlocks.filter(i => i.enabled !== false).slice(0,3)" :key="index" class="rounded-2xl border border-stone-950/10 p-3" :class="item.variant === "feature" ? "bg-stone-950 text-white" : item.variant === "soft" ? "bg-amber-50/60" : "bg-white/20"">
                     <p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ item.kicker }}</p>
                     <p class="mt-2 text-lg tracking-[-0.03em]">{{ item.title }}</p>
                   </div>
@@ -152,6 +157,7 @@
                 <p class="kicker">Social</p>
                 <div class="mt-4 grid gap-3">
                   <div v-for="(item, index) in socialItems.filter(i => i.enabled !== false).slice(0,4)" :key="index" class="rounded-2xl border border-stone-950/10 bg-white/20 p-3">
+                    <img v-if="item.iconUrl" :src="item.iconUrl" class="mb-2 h-7 w-7 rounded-lg object-cover" />
                     <p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ item.type }}</p>
                     <p class="mt-2 text-lg tracking-[-0.03em]">{{ item.label }}</p>
                   </div>
@@ -205,8 +211,8 @@ const editingCategoryId = ref<number | null>(null)
 const editingLinkId = ref<number | null>(null)
 const editingProjectId = ref<number | null>(null)
 const exportText = ref('')
-const socialItems = ref<Array<{ type: string; label: string; href: string; enabled?: boolean }>>([])
-const nowBlocks = ref<Array<{ kicker: string; title: string; desc: string; enabled?: boolean }>>([])
+const socialItems = ref<Array<{ type: string; label: string; href: string; enabled?: boolean; iconUrl?: string }>>([])
+const nowBlocks = ref<Array<{ kicker: string; title: string; desc: string; enabled?: boolean; variant?: string }>>([])
 const tabs = [{ key: 'overview', label: '概览' }, { key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }, { key: 'profile', label: '个人档案' }, { key: 'projects', label: '项目作品' }, { key: 'data', label: '数据导出' }] as const
 const themes = [
   { name: '极简浅色', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' },
@@ -244,6 +250,7 @@ async function login() { const res = await api.login(password.value); auth.setTo
 function logout() { auth.clear(); loggedIn.value = false; flash('已退出登录') }
 function applyTheme(theme: { backgroundType: string; backgroundValue: string; customCss: string }) { Object.assign(siteForm, theme); flash('主题已应用，保存后生效') }
 async function upload(file: File | undefined) { if (!file) return ''; const asset = await api.uploadIcon(file); return asset.path }
+async function uploadSocialIcon(event: Event, index: number) { const path = await upload((event.target as HTMLInputElement).files?.[0]); if (path) socialItems.value[index].iconUrl = path }
 async function uploadSiteAvatar(event: Event) { const path = await upload((event.target as HTMLInputElement).files?.[0]); if (path) { siteForm.avatarUrl = path; flash('头像已上传') } }
 async function uploadLinkIcon(event: Event) { const path = await upload((event.target as HTMLInputElement).files?.[0]); if (path) { linkForm.iconUrl = path; flash('图标已上传') } }
 async function saveSite() { await api.updateSiteConfig(siteForm); await loadAll(); flash('主页配置已保存') }
@@ -265,10 +272,10 @@ async function saveProfile() {
   await loadAll()
   flash('个人档案已保存')
 }
-function addSocial() { socialItems.value.push({ type: 'Social', label: '', href: '', enabled: true }) }
+function addSocial() { socialItems.value.push({ type: 'Social', label: '', href: '', enabled: true, iconUrl: '' }) }
 function moveSocial(index: number, delta: number) { const target = index + delta; if (target < 0 || target >= socialItems.value.length) return; const [item] = socialItems.value.splice(index, 1); socialItems.value.splice(target, 0, item) }
 function removeSocial(index: number) { socialItems.value.splice(index, 1) }
-function addNow() { nowBlocks.value.push({ kicker: 'Focus', title: '', desc: '', enabled: true }) }
+function addNow() { nowBlocks.value.push({ kicker: 'Focus', title: '', desc: '', enabled: true, variant: 'default' }) }
 function moveNow(index: number, delta: number) { const target = index + delta; if (target < 0 || target >= nowBlocks.value.length) return; const [item] = nowBlocks.value.splice(index, 1); nowBlocks.value.splice(target, 0, item) }
 function removeNow(index: number) { nowBlocks.value.splice(index, 1) }
 function editProject(project: Project) { editingProjectId.value = project.id; Object.assign(projectForm, project) }

@@ -6,6 +6,7 @@
     </div>
     <div class="grid gap-3 sm:grid-cols-3">
       <a v-for="item in visibleLinks" :key="item.label" :href="item.href" target="_blank" rel="noreferrer" class="rounded-2xl border border-stone-950/10 bg-white/25 p-4 transition hover:-translate-y-1 hover:bg-stone-950 hover:text-white">
+        <img v-if="item.iconUrl" :src="item.iconUrl" class="mb-4 h-9 w-9 rounded-xl object-cover" />
         <p class="mono text-[10px] uppercase tracking-[.2em] opacity-60">{{ item.type }}</p>
         <p class="mt-3 text-xl tracking-[-0.03em]">{{ item.label }}</p>
       </a>
@@ -15,7 +16,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-const props = defineProps<{ links?: Array<{ type: string; label: string; href: string; enabled?: boolean }> }>()
+const props = defineProps<{ links?: Array<{ type: string; label: string; href: string; enabled?: boolean; iconUrl?: string }> }>()
 const fallback = [
   { type: 'Code', label: 'GitHub', href: 'https://github.com/cshaizhihao' },
   { type: 'Archive', label: 'Projects', href: '/projects' },
