@@ -29,7 +29,28 @@
         <p v-if="message" class="mb-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</p>
         <p v-if="store.error" class="mb-5 rounded-2xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{{ store.error }}</p>
 
-        <form v-if="activeTab === 'site'" class="grid gap-4" @submit.prevent="saveSite">
+        <div v-if="activeTab === 'overview'" class="grid gap-6">
+          <div class="grid gap-4 md:grid-cols-3">
+            <AdminStatCard label="导航分类" :value="store.categories.length" hint="当前已配置分类" />
+            <AdminStatCard label="导航链接" :value="store.links.length" hint="包含隐藏链接" />
+            <AdminStatCard label="可见链接" :value="store.visibleLinks.length" hint="前台展示数量" />
+          </div>
+          <div class="grid gap-4 md:grid-cols-3">
+            <button class="primary-btn" @click="activeTab = 'site'">编辑主页内容</button>
+            <button class="primary-btn" @click="activeTab = 'links'">管理导航链接</button>
+            <RouterLink to="/" class="ghost-btn text-center">预览前台首页</RouterLink>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-white/70 p-6">
+            <h3 class="text-lg font-semibold">产品完整度提醒</h3>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-slate-600">
+              <li>· 首页已完成产品化叙事入口，下一步补真实内容模块。</li>
+              <li>· 后台已具备登录保护，生产环境请定期更换密码。</li>
+              <li>· 开源文档已补齐基础文件，下一步补截图与 Release。</li>
+            </ul>
+          </div>
+        </div>
+
+        <form v-else-if="activeTab === 'site'" class="grid gap-4" @submit.prevent="saveSite">
           <div class="grid gap-3 md:grid-cols-4">
             <button v-for="theme in themes" :key="theme.name" type="button" class="ghost-btn text-left" @click="applyTheme(theme)">{{ theme.name }}</button>
           </div>
@@ -76,17 +97,18 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
+import AdminStatCard from '../components/AdminStatCard.vue'
 import { api, auth, type NavCategory, type NavLink } from '../api/client'
 import { useSiteStore } from '../stores/site'
 
 const store = useSiteStore()
-const activeTab = ref<'site' | 'categories' | 'links'>('site')
+const activeTab = ref<'overview' | 'site' | 'categories' | 'links'>('overview')
 const message = ref('')
 const password = ref('')
 const loggedIn = ref(auth.isLoggedIn())
 const editingCategoryId = ref<number | null>(null)
 const editingLinkId = ref<number | null>(null)
-const tabs = [{ key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }] as const
+const tabs = [{ key: 'overview', label: '概览' }, { key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }] as const
 const themes = [
   { name: '极简浅色', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' },
   { name: '深空暗色', backgroundType: 'gradient', backgroundValue: 'linear-gradient(135deg,#020617,#111827)', customCss: 'body { color-scheme: dark; } .bg-white\\/75,.bg-white\\/70 { background: rgba(15,23,42,.72); color: #e5e7eb; border-color: rgba(148,163,184,.24); } .text-slate-950 { color: #f8fafc; } .text-slate-600,.text-slate-500 { color: #cbd5e1; }' },

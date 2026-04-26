@@ -185,3 +185,11 @@
 - Added LICENSE, CONTRIBUTING.md and SECURITY.md.
 - Added `/projects` and `/profile` routes as productized information architecture.
 - Updated homepage CTAs to point to navigation center, projects and admin.
+
+### 2026-04-26 后台产品化概览
+
+- Added admin overview dashboard.
+- Added stat cards for categories, total links and visible links.
+- Added quick actions to edit homepage, manage links and preview frontend.
+- Added product completeness reminders in CMS overview.
+- Redeployed production frontend.
