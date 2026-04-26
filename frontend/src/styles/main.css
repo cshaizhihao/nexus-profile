@@ -83,3 +83,13 @@ body::after {
 .link-orb::after { content:""; position:absolute; inset:auto -20% -65% -20%; height:90%; background:radial-gradient(circle, rgba(155,72,25,.28), transparent 62%); transition: transform 360ms cubic-bezier(.2,.8,.2,1); }
 .link-orb:hover::after { transform: translateY(-26%); }
 @media (max-width: 760px) { .quick-dock { width: calc(100% - 1.5rem); overflow-x:auto; justify-content:flex-start; } .dock-item { min-width:max-content; } main { padding-bottom:6rem; } }
+
+:root.dark-archive,
+body.dark-archive {
+  --ink: #f4efe6;
+  --muted: #b8ad9c;
+  --paper: #11100e;
+  --card: rgba(32, 29, 25, 0.76);
+  --line: rgba(244,239,230,0.14);
+  --accent: #d78745;
+}

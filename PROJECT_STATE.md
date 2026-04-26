@@ -221,3 +221,11 @@
 - Added page reveal animation and hover orb detail.
 - Improved mobile bottom dock behavior.
 - Redeployed production frontend.
+
+### 2026-04-26 子页视觉打磨
+
+- Reworked navigation page with stats, health summary, stronger empty state and link status dots.
+- Reworked projects page into portfolio-style asymmetrical grid with visual placeholders.
+- Reworked profile page with dossier layout, tag chips and stack grid.
+- Added dark archive CSS variable baseline for future theme compatibility.
+- Redeployed production frontend.
