@@ -91,14 +91,47 @@
           <div class="grid gap-3"><article v-for="link in store.links" :key="link.id" class="flex items-center justify-between gap-4 rounded-2xl border border-stone-950/10 bg-white/25 p-4"><div class="flex items-center gap-3"><img v-if="link.iconUrl" :src="link.iconUrl" class="h-10 w-10 rounded-xl object-cover" /><div><h3 class="font-semibold">{{ link.title }}</h3><p class="break-all text-sm text-slate-400">{{ link.url }}</p><p class="mt-1 text-xs text-slate-400">状态：<span :class="healthClass(link.healthStatus)">{{ healthLabel(link.healthStatus) }}</span><span v-if="link.healthCode"> · {{ link.healthCode }}</span></p></div></div><div class="flex gap-2"><button class="ghost-btn" @click="checkLink(link.id)">检测</button><button class="ghost-btn" @click="editLink(link)">编辑</button><button class="danger-btn" @click="removeLink(link.id)">删除</button></div></article></div>
         </div>
 
-        <form v-else-if="activeTab === 'profile'" class="grid gap-4" @submit.prevent="saveProfile">
+        <form v-else-if="activeTab === 'profile'" class="grid gap-5" @submit.prevent="saveProfile">
           <label class="field"><span>档案标题</span><input v-model="profileForm.headline" /></label>
           <label class="field"><span>个人简介</span><textarea v-model="profileForm.bio" rows="4" /></label>
           <label class="field"><span>当前状态</span><input v-model="profileForm.status" /></label>
           <label class="field"><span>身份标签，逗号分隔</span><input v-model="profileForm.tags" /></label>
           <label class="field"><span>技术栈，逗号分隔</span><input v-model="profileForm.techStack" /></label>
-          <label class="field"><span>社交链接 JSON</span><textarea v-model="profileForm.socialLinks" rows="6" /></label>
-          <label class="field"><span>Now Board JSON</span><textarea v-model="profileForm.nowItems" rows="6" /></label>
+
+          <section class="archive-card p-5">
+            <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Social links</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">社交入口</h3></div><button type="button" class="ghost-btn" @click="addSocial">新增</button></div>
+            <div class="grid gap-3">
+              <div v-for="(item, index) in socialItems" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4 md:grid-cols-[120px_1fr_1fr_auto]">
+                <input v-model="item.type" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="类型" />
+                <input v-model="item.label" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="名称" />
+                <input v-model="item.href" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="链接" />
+                <button type="button" class="danger-btn" @click="removeSocial(index)">删除</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="archive-card p-5">
+            <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Now board</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">当前关注</h3></div><button type="button" class="ghost-btn" @click="addNow">新增</button></div>
+            <div class="grid gap-3">
+              <div v-for="(item, index) in nowBlocks" :key="index" class="grid gap-3 rounded-2xl border border-stone-950/10 bg-white/20 p-4">
+                <div class="grid gap-3 md:grid-cols-2">
+                  <input v-model="item.kicker" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="Kicker" />
+                  <input v-model="item.title" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" placeholder="标题" />
+                </div>
+                <textarea v-model="item.desc" class="rounded-xl border border-stone-950/10 bg-white/50 px-3 py-2" rows="3" placeholder="描述" />
+                <div><button type="button" class="danger-btn" @click="removeNow(index)">删除</button></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="archive-card p-5">
+            <div class="mb-4 flex items-center justify-between"><div><p class="kicker">Live preview</p><h3 class="mt-2 text-2xl tracking-[-0.04em]">首页预览</h3></div></div>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div class="rounded-2xl border border-stone-950/10 bg-white/20 p-4"><p class="kicker">Now</p><div class="mt-3 grid gap-3"><div v-for="(item, index) in nowBlocks.slice(0,3)" :key="index"><p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ item.kicker }}</p><p class="mt-2 text-xl tracking-[-0.03em]">{{ item.title }}</p></div></div></div>
+              <div class="rounded-2xl border border-stone-950/10 bg-white/20 p-4"><p class="kicker">Social</p><div class="mt-3 grid gap-3"><div v-for="(item, index) in socialItems.slice(0,3)" :key="index"><p class="mono text-[10px] uppercase tracking-[.2em] text-stone-500">{{ item.type }}</p><p class="mt-2 text-xl tracking-[-0.03em]">{{ item.label }}</p></div></div></div>
+            </div>
+          </section>
+
           <button class="primary-btn">保存个人档案</button>
         </form>
 
@@ -144,6 +177,8 @@ const editingCategoryId = ref<number | null>(null)
 const editingLinkId = ref<number | null>(null)
 const editingProjectId = ref<number | null>(null)
 const exportText = ref('')
+const socialItems = ref<Array<{ type: string; label: string; href: string }>>([])
+const nowBlocks = ref<Array<{ kicker: string; title: string; desc: string }>>([])
 const tabs = [{ key: 'overview', label: '概览' }, { key: 'site', label: '主页内容' }, { key: 'categories', label: '导航分类' }, { key: 'links', label: '链接管理' }, { key: 'profile', label: '个人档案' }, { key: 'projects', label: '项目作品' }, { key: 'data', label: '数据导出' }] as const
 const themes = [
   { name: '极简浅色', backgroundType: 'color', backgroundValue: '#f8fafc', customCss: '' },
@@ -167,7 +202,13 @@ const profileForm = reactive({
 const projectForm = reactive({ title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true })
 
 watch(() => store.siteConfig, (config) => { if (config) Object.assign(siteForm, { title: config.title, subtitle: config.subtitle, description: config.description, avatarUrl: config.avatarUrl || '', backgroundType: config.backgroundType, backgroundValue: config.backgroundValue, customCss: config.customCss }) }, { immediate: true })
-watch(() => store.profile, (profile) => { if (profile) Object.assign(profileForm, profile) }, { immediate: true })
+watch(() => store.profile, (profile) => {
+  if (profile) {
+    Object.assign(profileForm, profile)
+    try { socialItems.value = JSON.parse(profile.socialLinks || '[]') } catch { socialItems.value = [] }
+    try { nowBlocks.value = JSON.parse(profile.nowItems || '[]') } catch { nowBlocks.value = [] }
+  }
+}, { immediate: true })
 watch(() => store.categories, (categories) => { if (!linkForm.categoryId && categories[0]) linkForm.categoryId = categories[0].id }, { immediate: true })
 async function loadAll() { await store.loadAll() }
 function flash(text: string) { message.value = text; setTimeout(() => (message.value = ''), 2200) }
@@ -189,7 +230,17 @@ async function checkAllLinks() { await api.checkAllLinks(); await loadAll(); fla
 function healthLabel(status: string) { return { ok: '正常', broken: '失效', timeout: '超时', unknown: '未检测' }[status] || status }
 function healthClass(status: string) { return status === 'ok' ? 'text-emerald-600' : status === 'unknown' ? 'text-slate-400' : 'text-rose-600' }
 async function removeLink(id: number) { await api.deleteLink(id); await loadAll(); flash('导航链接已删除') }
-async function saveProfile() { await contentApi.updateProfile(profileForm); await loadAll(); flash('个人档案已保存') }
+async function saveProfile() {
+  profileForm.socialLinks = JSON.stringify(socialItems.value, null, 2)
+  profileForm.nowItems = JSON.stringify(nowBlocks.value, null, 2)
+  await contentApi.updateProfile(profileForm)
+  await loadAll()
+  flash('个人档案已保存')
+}
+function addSocial() { socialItems.value.push({ type: 'Social', label: '', href: '' }) }
+function removeSocial(index: number) { socialItems.value.splice(index, 1) }
+function addNow() { nowBlocks.value.push({ kicker: 'Focus', title: '', desc: '' }) }
+function removeNow(index: number) { nowBlocks.value.splice(index, 1) }
 function editProject(project: Project) { editingProjectId.value = project.id; Object.assign(projectForm, project) }
 function resetProjectForm() { editingProjectId.value = null; Object.assign(projectForm, { title: '', type: 'Project', description: '', url: '', imageUrl: '', sortOrder: 0, isFeatured: true }) }
 async function saveProject() { editingProjectId.value ? await contentApi.updateProject(editingProjectId.value, projectForm) : await contentApi.createProject(projectForm); resetProjectForm(); await loadAll(); flash('项目已保存') }

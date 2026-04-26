@@ -274,3 +274,12 @@
 - Homepage SocialRail now reads backend profile config JSON.
 - Admin profile tab now supports editing Social Links JSON and Now Board JSON.
 - Redeployed production frontend.
+
+### 2026-04-27 Profile 可视化配置
+
+- Replaced manual JSON-only editing for homepage modules with visual add/remove forms.
+- Added editable Social links list in admin profile tab.
+- Added editable Now board cards in admin profile tab.
+- Added live preview block for homepage module content inside admin.
+- Save action serializes form state back into JSON for backend compatibility.
+- Redeployed production frontend.
