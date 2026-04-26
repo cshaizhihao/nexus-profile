@@ -315,3 +315,12 @@
 - Upgraded preview to reflect Hero + Now + Social + Projects with layout toggles.
 - Homepage now consumes backend layout mode.
 - Redeployed production frontend.
+
+### 2026-04-27 前端视觉方向重置
+
+- Replaced retro paper/archive aesthetic with high-fashion tech editorial direction.
+- Switched primary typography to Syne + Manrope.
+- Rebuilt color system to dark premium contrast with violet/cyan accent lighting.
+- Removed old paper texture language and unified components under modern glass-metal surfaces.
+- Preserved CMS/product structure while replacing visual identity system.
+- Redeployed production frontend.
