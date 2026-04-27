@@ -390,3 +390,12 @@
 - Improved project fallback art set with stronger poster-like graphics.
 - Continued subtraction pass to keep focus on personal homepage + quick navigation.
 - Redeployed production frontend.
+
+### 2026-04-27 导航与封面终态强化
+
+- Added hero art asset cover-helix.svg and project art asset offset-panel.svg.
+- Further refined minimal nav into a more brand-like line navigation.
+- Increased hero visual size and status panel presence.
+- Strengthened first quick-link cards into more poster-like priority surfaces.
+- Continued premium art-forward homepage refinement around quick navigation.
+- Redeployed production frontend.

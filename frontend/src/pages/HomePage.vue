@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="hero-visual hero-reveal-delay">
-        <img class="hero-art" src="/art/prism-surface.svg" alt="hero art" />
+        <img class="hero-art" src="/art/cover-helix.svg" alt="hero art" />
         <div class="hero-status-card">
           <p class="kicker">Current</p>
           <p class="hero-status-text">{{ profile?.status || '保持主页干净、好看、好用。' }}</p>
