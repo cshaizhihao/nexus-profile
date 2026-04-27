@@ -10,13 +10,13 @@
             <p class="text-sm font-semibold tracking-[-0.03em]">Personal Gateway</p>
           </div>
         </RouterLink>
-        <div class="nav-bar-shell nav-scroll">
-          <div class="nav-bar">
-            <RouterLink class="nav-tab nav-tab-main" to="/">主页</RouterLink>
-            <RouterLink class="nav-tab nav-tab-main" to="/navigation">导航</RouterLink>
-            <RouterLink class="nav-tab" to="/projects">项目</RouterLink>
-            <RouterLink class="nav-tab" to="/profile">档案</RouterLink>
-            <RouterLink class="nav-tab nav-tab-subtle" to="/admin">管理</RouterLink>
+        <div class="nav-minimal nav-scroll">
+          <div class="nav-minimal-line">
+            <RouterLink class="nav-link nav-link-main" to="/">主页</RouterLink>
+            <RouterLink class="nav-link nav-link-main" to="/navigation">导航</RouterLink>
+            <RouterLink class="nav-link" to="/projects">项目</RouterLink>
+            <RouterLink class="nav-link" to="/profile">档案</RouterLink>
+            <RouterLink class="nav-link nav-link-subtle" to="/admin">管理</RouterLink>
           </div>
         </div>
       </nav>

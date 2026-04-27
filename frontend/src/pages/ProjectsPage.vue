@@ -29,7 +29,7 @@
 import { onMounted } from 'vue'
 import { useSiteStore } from '../stores/site'
 const store = useSiteStore()
-const art = ['/art/nebula-grid.svg', '/art/liquid-orbit.svg', '/art/editorial-wave.svg']
+const art = ['/art/monolith-poster.svg', '/art/signal-column.svg', '/art/prism-surface.svg', '/art/liquid-orbit.svg']
 function artFor(index: number) { return art[index % art.length] }
 onMounted(() => { if (!store.siteConfig) store.loadAll() })
 </script>

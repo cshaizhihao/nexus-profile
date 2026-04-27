@@ -380,3 +380,13 @@
 - Improved hero visual scale and status card presence.
 - Continued subtraction-focused homepage refinement.
 - Redeployed production frontend.
+
+### 2026-04-27 极简导航与主入口强化
+
+- Replaced pill-style top nav with cleaner line-based minimal nav.
+- Added new art assets: monolith-poster.svg and signal-column.svg.
+- Upgraded homepage hero art to monolith-poster.
+- Increased visual priority of quick-link cards and enlarged primary entries.
+- Improved project fallback art set with stronger poster-like graphics.
+- Continued subtraction pass to keep focus on personal homepage + quick navigation.
+- Redeployed production frontend.
