@@ -1,0 +1,20 @@
+<svg width="1600" height="1100" viewBox="0 0 1600 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1600" height="1100" fill="#09090B"/>
+<rect x="170" y="132" width="1260" height="836" rx="54" fill="url(#a)"/>
+<path d="M314 780C492 650 648 590 816 600C986 611 1134 729 1316 707" stroke="rgba(255,255,255,0.18)" stroke-width="4" stroke-linecap="round"/>
+<path d="M316 244H1286" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="8 10"/>
+<path d="M316 344H1286" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-dasharray="8 10"/>
+<path d="M316 444H1286" stroke="rgba(255,255,255,0.04)" stroke-width="2" stroke-dasharray="8 10"/>
+<circle cx="1158" cy="304" r="166" fill="url(#b)" fill-opacity="0.85"/>
+<defs>
+<linearGradient id="a" x1="232" y1="186" x2="1386" y2="936" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0A0F19"/>
+<stop offset="0.34" stop-color="#5B21B6"/>
+<stop offset="0.68" stop-color="#0891B2"/>
+<stop offset="1" stop-color="#F8FAFC"/>
+</linearGradient>
+<radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1158 304) rotate(90) scale(166)">
+<stop stop-color="#fff" stop-opacity="0.8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

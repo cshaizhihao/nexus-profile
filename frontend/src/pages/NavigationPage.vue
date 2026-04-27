@@ -6,7 +6,7 @@
         <h1 class="page-title">Navigation<br />Index</h1>
       </div>
       <div class="archive-card page-hero-card hero-reveal-delay gateway-hero-card">
-        <img class="gateway-hero-art" src="/art/portal-axis.svg" alt="gateway art" />
+        <img class="gateway-hero-art" src="/art/gateway-lattice.svg" alt="gateway art" />
         <div class="gateway-hero-overlay">
           <p class="page-copy">Search, filter, and jump. This page should feel like a working control surface, not a list dump.</p>
           <input v-model="keyword" class="page-search" placeholder="Search links, descriptions, or URLs..." />
@@ -39,7 +39,7 @@
 
     <div v-if="store.loading" class="archive-card p-8 text-zinc-400">Loading routes...</div>
     <div v-else-if="filteredGroups.length" class="grid gap-8 route-sections">
-      <section v-for="group in filteredGroups" :key="group.id" class="archive-card p-6 md:p-7">
+      <section v-for="(group, groupIndex) in filteredGroups" :key="group.id" class="archive-card p-6 md:p-7" :class="groupIndex === 0 ? "route-section-primary" : "route-section-secondary"">
         <div class="section-head mb-5">
           <div><p class="kicker">Category</p><h2 class="section-title">{{ group.name }}</h2></div>
           <span class="mono text-xs uppercase tracking-[.2em] text-zinc-500">{{ group.links.length }} links</span>
@@ -72,7 +72,7 @@ const filteredGroups = computed(() => {
   const q = keyword.value.trim().toLowerCase()
   return store.linksByCategory.map((group) => ({ ...group, links: group.links.filter((link) => !q || `${link.title} ${link.description} ${link.url}`.toLowerCase().includes(q)) })).filter((group) => group.links.length > 0)
 })
-const featuredLinks = computed(() => store.visibleLinks.slice(0, 4))
+const featuredLinks = computed(() => store.visibleLinks.slice(0, 5))
 const healthSummary = computed(() => {
   const ok = store.links.filter((l) => l.healthStatus === 'ok').length
   const bad = store.links.filter((l) => ['broken', 'timeout'].includes(l.healthStatus)).length

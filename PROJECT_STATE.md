@@ -452,3 +452,12 @@
 - Tightened navigation sections into cleaner primary workspace rhythm.
 - Continued making /navigation the clear operational center of the site.
 - Redeployed production frontend.
+
+### 2026-04-27 Navigation 工作台深化
+
+- Added gateway-lattice.svg as a stronger operational hero asset for navigation.
+- Expanded featured routes block and increased dominance of the primary featured card.
+- Added primary/secondary hierarchy across category sections.
+- Improved route card sizing and reduced dense list feeling.
+- Continued shaping /navigation into the clear main workspace of the product.
+- Redeployed production frontend.
