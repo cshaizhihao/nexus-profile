@@ -1,0 +1,17 @@
+<svg width="1600" height="1100" viewBox="0 0 1600 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1600" height="1100" fill="#09090B"/>
+<rect x="186" y="146" width="1228" height="808" rx="48" fill="url(#a)"/>
+<ellipse cx="1091" cy="333" rx="238" ry="180" fill="url(#b)" fill-opacity="0.88"/>
+<path d="M286 792C464 660 592 586 742 592C904 598 1030 736 1188 728C1276 723 1342 676 1392 636" stroke="rgba(255,255,255,0.18)" stroke-width="4" stroke-linecap="round"/>
+<defs>
+<linearGradient id="a" x1="244" y1="194" x2="1372" y2="920" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0B1020"/>
+<stop offset="0.38" stop-color="#6D28D9"/>
+<stop offset="0.72" stop-color="#0891B2"/>
+<stop offset="1" stop-color="#F8FAFC"/>
+</linearGradient>
+<radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1091 333) rotate(90) scale(180 238)">
+<stop stop-color="#fff" stop-opacity="0.82"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

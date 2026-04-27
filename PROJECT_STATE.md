@@ -408,3 +408,12 @@
 - Strengthened quick-link primary card to feel more like a cover panel.
 - Improved mature depth treatment for homepage and project surfaces.
 - Redeployed production frontend.
+
+### 2026-04-27 品牌首页最终抛光
+
+- Added hero art asset halo-sheet.svg and project asset stacked-signal.svg.
+- Further refined navigation into cleaner brand-like top-line system.
+- Increased homepage hero cover scale and added compact brand caption.
+- Enlarged priority quick-link cards and strengthened homepage focal hierarchy.
+- Improved project fallback art set for more mature product-site feel.
+- Redeployed production frontend.

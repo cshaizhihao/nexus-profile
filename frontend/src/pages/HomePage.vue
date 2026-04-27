@@ -9,9 +9,10 @@
           <RouterLink to="/navigation" class="primary-btn">进入常用入口</RouterLink>
           <RouterLink to="/projects" class="ghost-btn">查看项目</RouterLink>
         </div>
+        <p class="hero-caption mono">Personal homepage · quick navigation · selected work</p>
       </div>
       <div class="hero-visual hero-reveal-delay">
-        <img class="hero-art" src="/art/spectrum-slab.svg" alt="hero art" />
+        <img class="hero-art" src="/art/halo-sheet.svg" alt="hero art" />
         <div class="hero-status-card">
           <p class="kicker">Current</p>
           <p class="hero-status-text">{{ profile?.status || '保持主页干净、好看、好用。' }}</p>

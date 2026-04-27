@@ -806,3 +806,84 @@ body::after {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { min-height: 380px; }
 }
+
+
+/* Brand-homepage final polish */
+.brand-inline {
+  gap: 1rem;
+}
+.brand-mark {
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(56,189,248,.95));
+}
+.topbar {
+  background: linear-gradient(180deg, rgba(9,9,11,.74), rgba(9,9,11,.54));
+}
+.nav-minimal-line {
+  gap: 1.55rem;
+  border-bottom: 0;
+}
+.nav-link {
+  font-size: .93rem;
+  font-weight: 640;
+  letter-spacing: -.018em;
+}
+.nav-link.router-link-active::after {
+  bottom: 4px;
+  height: 2px;
+}
+.hero-copy { padding-top: .65rem; }
+.hero-panel {
+  padding: .95rem;
+  border-radius: 38px;
+}
+.hero-grid {
+  gap: 1rem;
+  grid-template-columns: minmax(0,1.02fr) minmax(500px,.98fr);
+}
+.hero-visual {
+  min-height: 620px;
+  border-radius: 38px;
+}
+.hero-status-card {
+  left: 1.5rem;
+  bottom: 1.5rem;
+  padding: 1.1rem 1.2rem;
+}
+.hero-caption {
+  margin-top: 1rem;
+  font-size: .7rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.36);
+}
+.quick-links-section {
+  padding: 1.55rem;
+}
+.quick-grid-priority {
+  grid-template-columns: 1.85fr 1.15fr 1fr;
+}
+.quick-card-primary {
+  min-height: 340px;
+}
+.quick-card-primary h3 {
+  font-size: 2.8rem;
+}
+.quick-card-primary p {
+  max-width: 32ch;
+}
+.project-panel-main .project-media {
+  height: 28rem;
+}
+.project-panel h2 {
+  font-size: 2.35rem;
+}
+.page-title {
+  font-size: clamp(4.3rem, 11vw, 9.4rem);
+}
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { min-height: 420px; }
+}
