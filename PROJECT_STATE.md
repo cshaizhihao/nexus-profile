@@ -361,3 +361,12 @@
 - Disabled bottom quick dock to reduce interface clutter.
 - Continued refining liquid glass surfaces toward cleaner premium look.
 - Redeployed production frontend.
+
+### 2026-04-27 导航优先二次打磨
+
+- Added stronger hero art resource for homepage.
+- Improved top navigation bar shell and active tab visual weight.
+- Increased quick-links block priority and made first card larger.
+- Refined project cover heights and visual hierarchy.
+- Continued subtraction pass to keep homepage focused on navigation use-case.
+- Redeployed production frontend.

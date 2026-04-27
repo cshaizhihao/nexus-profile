@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="hero-visual hero-reveal-delay">
-        <img class="hero-art" src="/art/liquid-orbit.svg" alt="hero art" />
+        <img class="hero-art" src="/art/chrome-ribbon.svg" alt="hero art" />
         <div class="hero-status-card">
           <p class="kicker">Current</p>
           <p class="hero-status-text">{{ profile?.status || '保持主页干净、好看、好用。' }}</p>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <section class="quick-links-section">
+    <section class="quick-links-section archive-card">
       <div class="section-head compact-head">
         <div>
           <p class="kicker">Quick links</p>
@@ -27,15 +27,15 @@
         </div>
         <RouterLink to="/navigation" class="mono text-xs uppercase tracking-[.2em] text-zinc-400">All routes</RouterLink>
       </div>
-      <div v-if="topLinks.length" class="quick-grid">
-        <a v-for="link in topLinks" :key="link.id" :href="link.url" target="_blank" rel="noreferrer" class="quick-card depth-card">
+      <div v-if="topLinks.length" class="quick-grid quick-grid-strong">
+        <a v-for="(link, index) in topLinks" :key="link.id" :href="link.url" target="_blank" class="quick-card depth-card" :class="index === 0 ? 'quick-card-primary' : ''">
           <img v-if="link.iconUrl" :src="link.iconUrl" class="mb-4 h-10 w-10 rounded-2xl object-cover" />
           <div v-else class="mb-4 grid h-10 w-10 place-items-center rounded-2xl border border-current/15 mono text-sm">{{ link.title.slice(0, 1).toUpperCase() }}</div>
           <h3>{{ link.title }}</h3>
           <p>{{ link.description || link.url }}</p>
         </a>
       </div>
-      <div v-else class="archive-card empty-state">
+      <div v-else class="empty-state">
         <p class="empty-title">还没有常用入口。</p>
         <p class="text-zinc-400">去后台添加导航分类和链接，这里会自动展示你最常用的入口。</p>
       </div>
