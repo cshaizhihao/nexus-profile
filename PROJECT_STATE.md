@@ -434,3 +434,12 @@
 - Added final hero gloss layer and refined title/lead proportions.
 - Muted projects preview slightly so navigation remains the core purpose.
 - Redeployed production frontend.
+
+### 2026-04-27 Navigation 主场化
+
+- Added dedicated gateway hero art asset gateway-beam.svg.
+- Elevated navigation page into a primary workspace with featured routes block.
+- Added stronger featured link hierarchy with enlarged primary card.
+- Reduced category link density to two-column layout for cleaner scannability.
+- Reframed navigation page as the core working surface of the product.
+- Redeployed production frontend.
