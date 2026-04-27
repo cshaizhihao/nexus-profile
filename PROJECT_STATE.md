@@ -426,3 +426,11 @@
 - Reduced visible quick links count to strengthen hierarchy.
 - Continued subtraction-first homepage refinement around quick navigation core.
 - Redeployed production frontend.
+
+### 2026-04-27 首页终局收口
+
+- Elevated Quick Links into the clearest primary functional block on the homepage.
+- Increased primary card scale and reduced competing visual weight from secondary sections.
+- Added final hero gloss layer and refined title/lead proportions.
+- Muted projects preview slightly so navigation remains the core purpose.
+- Redeployed production frontend.

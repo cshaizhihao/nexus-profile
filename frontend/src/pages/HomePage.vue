@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <section class="quick-links-section archive-card quick-links-primary-shell">
+    <section class="quick-links-section archive-card quick-links-primary-shell quick-links-dominant">
       <div class="section-head compact-head quick-links-head">
         <div>
           <p class="kicker">Quick links</p>
@@ -47,7 +47,7 @@
       <SocialRail v-if="homepageLayout.showSocial !== false" :links="socialLinks.slice(0, 3)" />
     </section>
 
-    <section v-if="homepageLayout.showProjects !== false && featuredProjects.length" class="projects-preview archive-card">
+    <section v-if="homepageLayout.showProjects !== false && featuredProjects.length" class="projects-preview archive-card projects-preview-muted">
       <div class="section-head compact-head quick-links-head">
         <div>
           <p class="kicker">Selected work</p>
