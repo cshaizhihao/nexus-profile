@@ -21,7 +21,7 @@
           <span class="mono text-xs uppercase tracking-[.2em] text-zinc-500">Top picks</span>
         </div>
         <div class="featured-link-grid">
-          <a v-for="(link, index) in featuredLinks" :key="link.id" :href="link.url" target="_blank" rel="noreferrer" class="featured-link-card" :class="index === 0 ? "featured-link-main" : """>
+          <a v-for="(link, index) in featuredLinks" :key="link.id" :href="link.url" target="_blank" rel="noreferrer" class="featured-link-card" :class="index === 0 ? 'featured-link-main' : ''">
             <img v-if="link.iconUrl" :src="link.iconUrl" class="mb-4 h-10 w-10 rounded-2xl object-cover" />
             <div v-else class="mb-4 grid h-10 w-10 place-items-center rounded-2xl border border-current/20 mono text-sm">{{ link.title.slice(0, 1).toUpperCase() }}</div>
             <h3>{{ link.title }}</h3>
