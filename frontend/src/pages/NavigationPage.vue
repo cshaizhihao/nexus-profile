@@ -39,7 +39,7 @@
 
     <div v-if="store.loading" class="archive-card p-8 text-zinc-400">Loading routes...</div>
     <div v-else-if="filteredGroups.length" class="grid gap-8 route-sections">
-      <section v-for="(group, groupIndex) in filteredGroups" :key="group.id" class="archive-card p-6 md:p-7" :class="groupIndex === 0 ? "route-section-primary" : "route-section-secondary"">
+      <section v-for="(group, groupIndex) in filteredGroups" :key="group.id" class="archive-card p-6 md:p-7" :class="groupIndex === 0 ? 'route-section-primary' : 'route-section-secondary'">
         <div class="section-head mb-5">
           <div><p class="kicker">Category</p><h2 class="section-title">{{ group.name }}</h2></div>
           <span class="mono text-xs uppercase tracking-[.2em] text-zinc-500">{{ group.links.length }} links</span>
