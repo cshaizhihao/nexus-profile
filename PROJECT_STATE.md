@@ -417,3 +417,12 @@
 - Enlarged priority quick-link cards and strengthened homepage focal hierarchy.
 - Improved project fallback art set for more mature product-site feel.
 - Redeployed production frontend.
+
+### 2026-04-27 KV 与入口终局强化
+
+- Added hero key visual asset kv-aperture.svg.
+- Rebalanced homepage hero proportions toward a more cover-like composition.
+- Elevated quick links into the dominant functional block with larger first and second cards.
+- Reduced visible quick links count to strengthen hierarchy.
+- Continued subtraction-first homepage refinement around quick navigation core.
+- Redeployed production frontend.

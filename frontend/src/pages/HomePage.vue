@@ -12,7 +12,7 @@
         <p class="hero-caption mono">Personal homepage · quick navigation · selected work</p>
       </div>
       <div class="hero-visual hero-reveal-delay">
-        <img class="hero-art" src="/art/halo-sheet.svg" alt="hero art" />
+        <img class="hero-art" src="/art/kv-aperture.svg" alt="hero art" />
         <div class="hero-status-card">
           <p class="kicker">Current</p>
           <p class="hero-status-text">{{ profile?.status || '保持主页干净、好看、好用。' }}</p>
@@ -20,15 +20,15 @@
       </div>
     </div>
 
-    <section class="quick-links-section archive-card">
-      <div class="section-head compact-head">
+    <section class="quick-links-section archive-card quick-links-primary-shell">
+      <div class="section-head compact-head quick-links-head">
         <div>
           <p class="kicker">Quick links</p>
           <h2 class="section-title">常用入口</h2>
         </div>
         <RouterLink to="/navigation" class="mono text-xs uppercase tracking-[.2em] text-zinc-400">All routes</RouterLink>
       </div>
-      <div v-if="topLinks.length" class="quick-grid quick-grid-strong quick-grid-priority">
+      <div v-if="topLinks.length" class="quick-grid quick-grid-strong quick-grid-priority quick-grid-hero">
         <a v-for="(link, index) in topLinks" :key="link.id" :href="link.url" target="_blank" class="quick-card depth-card" :class="index < 2 ? 'quick-card-primary' : ''">
           <img v-if="link.iconUrl" :src="link.iconUrl" class="mb-4 h-10 w-10 rounded-2xl object-cover" />
           <div v-else class="mb-4 grid h-10 w-10 place-items-center rounded-2xl border border-current/15 mono text-sm">{{ link.title.slice(0, 1).toUpperCase() }}</div>
@@ -48,7 +48,7 @@
     </section>
 
     <section v-if="homepageLayout.showProjects !== false && featuredProjects.length" class="projects-preview archive-card">
-      <div class="section-head compact-head">
+      <div class="section-head compact-head quick-links-head">
         <div>
           <p class="kicker">Selected work</p>
           <h2 class="section-title">精选项目</h2>
@@ -78,7 +78,7 @@ const config = computed(() => store.siteConfig)
 const profile = computed(() => store.profile)
 const displayName = computed(() => config.value?.title || 'Zaki Gateway')
 const featuredProjects = computed(() => store.projects.filter((p) => p.isFeatured).slice(0, 3))
-const topLinks = computed(() => store.visibleLinks.slice(0, 6))
+const topLinks = computed(() => store.visibleLinks.slice(0, 5))
 const socialLinks = computed(() => { try { return JSON.parse(store.profile?.socialLinks || '[]') } catch { return [] } })
 const nowItems = computed(() => { try { return JSON.parse(store.profile?.nowItems || '[]') } catch { return [] } })
 const homepageLayout = computed(() => { try { return JSON.parse(store.profile?.homepageLayout || '{}') } catch { return {} } })

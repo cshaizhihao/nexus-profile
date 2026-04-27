@@ -887,3 +887,112 @@ body::after {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { min-height: 420px; }
 }
+
+
+/* Final KV + quick-nav emphasis */
+.hero-panel {
+  padding: .9rem;
+  border-radius: 42px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)),
+    radial-gradient(circle at 82% 22%, rgba(255,255,255,.08), transparent 22%);
+}
+.hero-grid {
+  grid-template-columns: minmax(0, .96fr) minmax(540px, 1.02fr);
+  gap: .9rem;
+}
+.hero-copy {
+  padding: .85rem .45rem 1.2rem .55rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.hero-lead {
+  max-width: 520px;
+  font-size: 1.06rem;
+  line-height: 1.85;
+}
+.hero-visual {
+  min-height: 660px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.hero-art {
+  transform: scale(1.015);
+  filter: saturate(1.24) contrast(1.12) brightness(1.04);
+}
+.hero-status-card {
+  max-width: 500px;
+  padding: 1.2rem 1.25rem;
+  border-radius: 28px;
+}
+.hero-status-text {
+  font-size: 1.24rem;
+  line-height: 1.55;
+}
+.hero-caption {
+  letter-spacing: .3em;
+  color: rgba(255,255,255,.42);
+}
+
+.quick-links-primary-shell {
+  padding: 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
+    radial-gradient(circle at top right, rgba(124,58,237,.10), transparent 18%);
+}
+.quick-links-head {
+  margin-bottom: 1.1rem;
+}
+.quick-grid-hero {
+  grid-template-columns: 1.9fr 1.2fr .95fr;
+  gap: 1.1rem;
+}
+.quick-card {
+  min-height: 200px;
+  padding: 1.2rem;
+}
+.quick-card-primary {
+  min-height: 360px;
+  padding: 1.35rem;
+}
+.quick-card-primary h3 {
+  font-size: 3rem;
+  line-height: .92;
+}
+.quick-card-primary p {
+  margin-top: .9rem;
+  font-size: 1rem;
+  max-width: 30ch;
+}
+.quick-card-primary::after {
+  width: 280px;
+  height: 280px;
+  right: -55px;
+  bottom: -55px;
+}
+.quick-card:nth-child(2) {
+  min-height: 300px;
+}
+.quick-card:nth-child(2) h3 {
+  font-size: 2rem;
+}
+.quick-card h3 {
+  font-size: 1.7rem;
+}
+.quick-card p {
+  line-height: 1.72;
+}
+
+@media (max-width: 1180px) {
+  .quick-grid-hero { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { min-height: 420px; }
+}
+@media (max-width: 760px) {
+  .quick-grid-hero { grid-template-columns: 1fr; }
+  .quick-card-primary, .quick-card:nth-child(2) { min-height: auto; }
+  .quick-card-primary h3 { font-size: 2.2rem; }
+}
