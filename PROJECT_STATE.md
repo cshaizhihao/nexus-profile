@@ -370,3 +370,13 @@
 - Refined project cover heights and visual hierarchy.
 - Continued subtraction pass to keep homepage focused on navigation use-case.
 - Redeployed production frontend.
+
+### 2026-04-27 主导航与入口权重优化
+
+- Added stronger homepage hero art asset prism-surface.svg.
+- Refined top nav shell, tab spacing, active state and weight hierarchy.
+- Elevated quick-links section to primary functional area with larger priority cards.
+- Added subtle premium texture overlay using noise-metal asset.
+- Improved hero visual scale and status card presence.
+- Continued subtraction-focused homepage refinement.
+- Redeployed production frontend.
