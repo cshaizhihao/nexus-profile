@@ -1,5 +1,5 @@
 <template>
-  <section class="home-minimal">
+  <section class="home-minimal home-entry-shell">
     <div class="home-hero archive-card hero-panel">
       <div class="hero-text hero-reveal">
         <p class="kicker">Personal homepage / quick navigation</p>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <section class="quick-links-section archive-card quick-links-primary-shell quick-links-dominant">
+    <section class="quick-links-section archive-card quick-links-primary-shell quick-links-dominant quick-links-entry">
       <div class="section-head compact-head quick-links-head">
         <div>
           <p class="kicker">Quick links</p>
@@ -47,7 +47,7 @@
       <SocialRail v-if="homepageLayout.showSocial !== false" :links="socialLinks.slice(0, 3)" />
     </section>
 
-    <section v-if="homepageLayout.showProjects !== false && featuredProjects.length" class="projects-preview archive-card projects-preview-muted">
+    <section v-if="homepageLayout.showProjects !== false && featuredProjects.length" class="projects-preview archive-card projects-preview-muted projects-preview-quiet">
       <div class="section-head compact-head quick-links-head">
         <div>
           <p class="kicker">Selected work</p>

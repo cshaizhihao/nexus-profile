@@ -443,3 +443,12 @@
 - Reduced category link density to two-column layout for cleaner scannability.
 - Reframed navigation page as the core working surface of the product.
 - Redeployed production frontend.
+
+### 2026-04-27 Navigation-first 收口
+
+- Added portal-axis.svg as a stronger dedicated navigation hero asset.
+- Further reduced homepage competitive weight so it behaves more like an entry surface.
+- Increased featured-route hierarchy and main-card dominance inside navigation.
+- Tightened navigation sections into cleaner primary workspace rhythm.
+- Continued making /navigation the clear operational center of the site.
+- Redeployed production frontend.

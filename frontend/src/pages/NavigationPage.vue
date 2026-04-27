@@ -6,7 +6,7 @@
         <h1 class="page-title">Navigation<br />Index</h1>
       </div>
       <div class="archive-card page-hero-card hero-reveal-delay gateway-hero-card">
-        <img class="gateway-hero-art" src="/art/gateway-beam.svg" alt="gateway art" />
+        <img class="gateway-hero-art" src="/art/portal-axis.svg" alt="gateway art" />
         <div class="gateway-hero-overlay">
           <p class="page-copy">Search, filter, and jump. This page should feel like a working control surface, not a list dump.</p>
           <input v-model="keyword" class="page-search" placeholder="Search links, descriptions, or URLs..." />
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="gateway-top-grid">
+    <div class="gateway-top-grid gateway-top-grid-strong">
       <section v-if="featuredLinks.length" class="archive-card featured-gateway p-6">
         <div class="section-head compact-head">
           <div><p class="kicker">Featured routes</p><h2 class="section-title">精选入口</h2></div>
@@ -38,7 +38,7 @@
     </div>
 
     <div v-if="store.loading" class="archive-card p-8 text-zinc-400">Loading routes...</div>
-    <div v-else-if="filteredGroups.length" class="grid gap-8">
+    <div v-else-if="filteredGroups.length" class="grid gap-8 route-sections">
       <section v-for="group in filteredGroups" :key="group.id" class="archive-card p-6 md:p-7">
         <div class="section-head mb-5">
           <div><p class="kicker">Category</p><h2 class="section-title">{{ group.name }}</h2></div>
