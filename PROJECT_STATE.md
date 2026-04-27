@@ -399,3 +399,12 @@
 - Strengthened first quick-link cards into more poster-like priority surfaces.
 - Continued premium art-forward homepage refinement around quick navigation.
 - Redeployed production frontend.
+
+### 2026-04-27 品牌化导航与封面深化
+
+- Added hero art asset spectrum-slab.svg and support asset velvet-frame.svg.
+- Further polished top navigation toward cleaner brand-like line navigation.
+- Increased hero cover scale and status card composition.
+- Strengthened quick-link primary card to feel more like a cover panel.
+- Improved mature depth treatment for homepage and project surfaces.
+- Redeployed production frontend.
